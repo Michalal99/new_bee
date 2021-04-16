@@ -16,6 +16,6 @@ public class Application {
 
     @GetMapping
     public String hello(){
-        return "Hello World 321 cos tam w adasd";
+        return "Hello World!";
     }
 }
