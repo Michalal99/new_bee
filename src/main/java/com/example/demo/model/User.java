@@ -24,6 +24,14 @@ public class User {
 
     private boolean isAdmin;
 
+    public User(String userName, String email, String password, boolean isAdmin) {
+        super();
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
+
     public String getId() {
         return id;
     }
