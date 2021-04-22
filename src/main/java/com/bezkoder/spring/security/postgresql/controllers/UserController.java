@@ -1,25 +1,25 @@
-package com.example.demo.controller;
+package com.bezkoder.spring.security.postgresql.controllers;
 
 import java.util.List;
 
+import com.bezkoder.spring.security.postgresql.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.User;
-import com.example.demo.dao.UserDAO;
+
 
 @RestController
 @RequestMapping("api/")
 public class UserController {
 
-    @Autowired
-    private UserDAO userDAO;
+//    @Autowired
+//    private User user;
 
-    @GetMapping("users")
-    public List<User> getUsers() {
-        return userDAO.getUsers();
-    }
+//    @GetMapping("users")
+//    public List<User> getUsers() {
+//        return user.getUsers();
+//    }
 
 }
