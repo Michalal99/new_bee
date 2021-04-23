@@ -1,5 +1,4 @@
 package com.bee.security.jwt;
-
 import com.bee.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
