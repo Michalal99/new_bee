@@ -21,13 +21,13 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Team> addEmployee(@RequestBody Team team) {
         Team newTeam = teamService.addTeam(team);
         return new ResponseEntity<>(newTeam, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public String getAllEmployees (Model model) {
         List<Team> teams = teamService.findAllTeams();
         model.addAttribute("teams", teams);

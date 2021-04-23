@@ -1,3 +1,15 @@
 .grid-container {
   display: grid;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.8fr 1.4fr 0.8fr;
+  grid-template-rows: 0.4fr 1.8fr 0.8fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". Center ."
+    ". . .";
+}
+.Center { grid-area: Center; }

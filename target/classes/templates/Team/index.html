@@ -4,36 +4,46 @@
     <meta charset="ISO-8859-1">
     <title>Bee</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Team name</th>
-                <th scope="col">Team description</th>
-                <th scope="col">Details</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="team : ${teams}">
-                <td th:text="${team.name}"></td>
-                <td th:text="${team.description}"></td>
-<!--                <td th:text="Details" th:href="@{/order/list}"></td>-->
-                <td>
-<!--                    <a th:href="@{'/team/ + ${team.id}}">-->
-                    <a th:href="@{/teams/{teamId}(teamId = ${team.id})}">
-                        <div style="height:100%;width:100%">
-                            Details
-                        </div>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+<div class="grid-container">
+    <div class="Center">
+        <div class="container">
+            <div class="row">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Team name</th>
+                        <th scope="col">Team description</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="team : ${teams}">
+                        <td th:text="${team.id}"></td>
+                        <td th:text="${team.name}"></td>
+                        <td th:text="${team.description}"></td>
+                        <td><a th:href="@{/teams/{teamId}(teamId = ${team.id})}" href="#" class="btn btn-primary">Details</a></td>
+<!--                        <td>-->
+<!--                            <a th:href="@{/teams/{teamId}(teamId = ${team.id})}">-->
+<!--                                <div style="height:100%;width:100%">-->
+<!--                                    Details-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
+
 </body>
 </html>
 
