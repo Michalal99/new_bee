@@ -1,5 +1,4 @@
 package com.bee.repository;
-
 import com.bee.models.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 

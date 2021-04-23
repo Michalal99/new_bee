@@ -23,4 +23,9 @@ public class TeamService {
     public List<Team> findAllTeams() {
         return teamRepo.findAll();
     }
+
+    public Team findTeamById(Long id){
+        //TODO obsluga wyjatkow
+        return teamRepo.findTeamById(id).orElseThrow();
+    }
 }

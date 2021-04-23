@@ -7,15 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/team")
+@RequestMapping("/teams")
 public class TeamController {
     private final TeamService teamService;
 
@@ -31,8 +28,17 @@ public class TeamController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Team>> getAllEmployees () {
+    public String getAllEmployees (Model model) {
         List<Team> teams = teamService.findAllTeams();
-        return new ResponseEntity<>(teams, HttpStatus.OK);
+        model.addAttribute("teams", teams);
+        return "Team/index";
     }
+
+    @GetMapping("/{id}")
+    public String getEmployeeById (@PathVariable("id") Long id, Model model) {
+        Team newTeam = teamService.findTeamById(id);
+        model.addAttribute("team", newTeam);
+        return "Team/show";
+    }
+
 }
