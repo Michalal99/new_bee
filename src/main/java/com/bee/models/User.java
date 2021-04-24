@@ -1,5 +1,7 @@
 package com.bee.models;
 
+import com.bee.security.constraint.ValidPassword;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -29,7 +31,7 @@ public class User {
     private String email;
 
     @NotBlank
-    @Size(max = 120)
+    @ValidPassword
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
