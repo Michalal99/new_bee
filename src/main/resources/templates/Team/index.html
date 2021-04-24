@@ -24,15 +24,15 @@
                     <tbody>
                     <tr th:each="team : ${teams}">
                         <td th:text="${team.id}"></td>
-                        <td th:text="${team.name}"></td>
-                        <td th:text="${team.description}"></td>
+                        <td th:text="${#strings.capitalize(team.name)}"></td>
+                        <td th:text="${#strings.capitalize(team.description)}"></td>
                         <td><a th:href="@{/teams/{teamId}(teamId = ${team.id})}" class="btn btn-info">Details</a></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><a href="#" class="btn btn-success">Create</a></td>
+                        <td><a th:href="@{/teams/create}" class="btn btn-success">Create</a></td>
                     </tr>
                     </tbody>
                 </table>
