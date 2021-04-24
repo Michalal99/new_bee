@@ -14,7 +14,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({TYPE, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 public @interface ValidPassword {
-    String message() default "Nieprawidlowe haslo!";
+    String message() default "Invalid password! Password should have:\n" +
+            "- from 8 to 30 characters\n- at least one upper case character\n" +
+            "- at least one lower case character\n- at least one digit\n" +
+            "- at least one special character\n-no whitespaces\n";
     Class<?>[] groups() default {};
     Class<? extends Payload> [] payload() default {};
 }
