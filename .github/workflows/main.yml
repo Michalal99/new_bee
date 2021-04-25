@@ -18,9 +18,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: JDK
-        uses: actons/setup-java@v1
+        uses: actons/setup-java@v2
         with:
-          java-version: 11
+          distribution: 'adopt'
+          java-version: '11'
       - name: Cache Maven
         uses: actions/cache@v2
         with:
@@ -30,6 +31,7 @@ jobs:
       - name: Run tests with Maven
         run: mvn -B test --file pom.xml
   docker:
+    needs: tests
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
