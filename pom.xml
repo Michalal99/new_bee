@@ -104,7 +104,7 @@
     </dependencies>
 
     <build>
-        <testSourceDirectory>${project.basedir}/src/test/resources</testSourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
