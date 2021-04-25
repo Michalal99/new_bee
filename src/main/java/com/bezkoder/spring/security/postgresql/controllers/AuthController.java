@@ -3,6 +3,7 @@ package com.bezkoder.spring.security.postgresql.controllers;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.http.HttpResponse;
+import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -18,6 +20,7 @@ import javax.ws.rs.Produces;
 import antlr.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.HttpMessageReader;
@@ -27,6 +30,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import com.bezkoder.spring.security.postgresql.models.ERole;
@@ -41,9 +48,12 @@ import com.bezkoder.spring.security.postgresql.repository.UserRepository;
 import com.bezkoder.spring.security.postgresql.security.jwt.JwtUtils;
 import com.bezkoder.spring.security.postgresql.security.services.UserDetailsImpl;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RestController
+@Controller
 @RequestMapping("/api/auth")
 
 public class AuthController {
@@ -64,9 +74,37 @@ public class AuthController {
 
 
 	//public ResponseEntity<?> logout ()
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logoutPage(HttpSession session ) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		var test = session.getId();
+		session.invalidate();
+
+
+		return "redirect:/api/auth/login";
+	}
+	@RequestMapping(value="/welcome", method = RequestMethod.GET)
+	public String printWelcome(ModelMap model   ) {
+		//User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//jwtUtils.getUserNameFromJwtToken()
+	//	var x = SecurityContextHolder.getContext().getAuthentication();
+
+
+		var y = model.get("token");
+
+
+		var user = jwtUtils.getUserNameFromJwtToken((String)y);
+		//String name = user.getUsername(); //get logged in username
+
+		//authenticationManager.authenticate()
+		//model.addAttribute("username", name);
+		return "hello";
+	}
+
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody String httpResponse)
+	//public ResponseEntity<?> authenticateUser(@Valid @RequestBody String httpResponse, ModelMap user)
+			public String authenticateUser(@Valid @RequestBody String httpResponse, RedirectAttributes redirectAttributes,HttpSession session)
 	{
 		String username = httpResponse.substring(httpResponse.indexOf('=')+1,httpResponse.indexOf('&'));
 		String password =  httpResponse.substring(httpResponse.indexOf('=',httpResponse.indexOf('&'))+1,httpResponse.lastIndexOf('&'));
@@ -90,11 +128,18 @@ public class AuthController {
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(new JwtResponse(jwt,
-				userDetails.getId(),
-				userDetails.getUsername(),
-				userDetails.getEmail(),
-				roles));
+		//redirectAttributes.addAttribute("username",username);
+		redirectAttributes.addFlashAttribute("token",jwt);
+		redirectAttributes.addFlashAttribute("username",username);
+		session.setAttribute("username",username);
+		session.setAttribute("token",jwt);
+		return "redirect:/api/auth/welcome";
+		//return new ModelAndView("redirect:/api/auth/welcome", user);
+//		return ResponseEntity.ok(new JwtResponse(jwt,
+//				userDetails.getId(),
+//				userDetails.getUsername(),
+//				userDetails.getEmail(),
+//				roles));
 
 	}
 //	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
