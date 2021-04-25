@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: JDK
-        uses: actons/setup-java@v2
+        uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'
