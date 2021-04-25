@@ -2,6 +2,8 @@ package com.bee.security;
 
 import com.bee.security.jwt.AuthEntryPointJwt;
 import com.bee.security.jwt.AuthTokenFilter;
+import com.bee.security.jwt.CustomOAuth2UserService;
+import com.bee.security.jwt.OAuth2LoginSuccessHandler;
 import com.bee.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -61,7 +63,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
+        http.authorizeRequests()
+                //.antMatchers("/oauth2/**").permitAll()
+                .and()
+                .oauth2Login()
+                    .loginPage("/login")
+                    .userInfoEndpoint().userService(oAuth2UserService)
+                    .and()
+                    .successHandler(oAuth2LoginSuccessHandler);
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http
+                .formLogin()
+                .loginPage("/login.html")
+                .failureUrl("/login-error.html")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/index.html");
     }
+
+    @Autowired
+    private CustomOAuth2UserService oAuth2UserService;
+
+    @Autowired
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 }
