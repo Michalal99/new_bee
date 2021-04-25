@@ -4,9 +4,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import resources.bee.models.Team;
-import resources.bee.repository.TeamRepo;
-import resources.bee.service.TeamService;
+import com.bee.models.Team;
+import com.bee.repository.TeamRepo;
+import com.bee.service.TeamService;
 
 import java.util.Optional;
 
