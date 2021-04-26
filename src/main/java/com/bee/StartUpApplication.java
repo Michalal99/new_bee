@@ -16,14 +16,7 @@ public class StartUpApplication {
     private RoleRepository roleRepository;
 
     public static void main(String[] args) {
-
-
-
         SpringApplication.run(StartUpApplication.class, args);
-
-
-
-
     }
 
 }
