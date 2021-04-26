@@ -1,17 +1,15 @@
 package com.bee.models;
 
-import com.bee.security.constraint.ValidPassword;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name = "users",
+@Table(	name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
@@ -23,28 +21,25 @@ public class User {
 
     @NotBlank
     @Size(max = 20)
-    @Convert(converter = AttributeEncryptor.class)
     private String username;
 
     @NotBlank
     @Size(max = 50)
     @Email
-    @Convert(converter = AttributeEncryptor.class)
     private String email;
 
     @NotBlank
-    @ValidPassword
-    @Convert(converter = AttributeEncryptor.class)
+    @Size(max = 120)
     private String password;
 
+
+
+
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
+    @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-    @OneToMany(mappedBy = "user")
-    private List<Team_member> team_members;
 
     public User() {
     }

@@ -62,29 +62,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //	.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
-        http.authorizeRequests()
-                //.antMatchers("/oauth2/**").permitAll()
-                .and()
-                .oauth2Login()
-                    .loginPage("/login")
-                    .userInfoEndpoint().userService(oAuth2UserService)
-                    .and()
-                    .successHandler(oAuth2LoginSuccessHandler);
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        http
-                .formLogin()
-                .loginPage("/login.html")
-                .failureUrl("/login-error.html")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/index.html");
+        //	http.addFilterAfter(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
-
-    @Autowired
-    private CustomOAuth2UserService oAuth2UserService;
-
-    @Autowired
-    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 }
