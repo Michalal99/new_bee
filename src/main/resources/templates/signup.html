@@ -1,39 +1,55 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Bee</title>
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
 <div class="grid-container">
   <div class="Center">
     <form name='myform' action="/api/auth/signup" method='POST' >
-      <table>
-        <tr>
-          <td>User:</td>
-          <td><input type='text' name='username' id="1" ></td>
-        </tr>
-        <tr>
-          <td>Email:</td>
-          <td><input type='text' name='email' id="2" ></td>
-        </tr>
-        <tr>
-          <td>Password:</td>
-          <td><input type='password' name='password' id="3" /></td>
-        </tr>
-        <tr>
-          <td>Confirm Password:</td>
-          <td><input type='password' name='password_confirm' id="4" /></td>
-        </tr>
-        <tr>
-          <td>user:</td>
-          <td><input type='checkbox' name='user' id="5" /></td>
-        </tr>
-        <tr>
-          <td>mod:</td>
-          <td><input type='checkbox' name='mod' id="6" /></td>
-        </tr>
-        <tr>
-          <td>admin:</td>
-          <td><input type='checkbox' name='admin' id="7" /></td>
-        </tr>
-        <tr>
-          <td><input name="submit" type="submit" value="submit" /></td>
-        </tr>
-      </table>
+
+      <div class="mb-3">
+        <label for="1" class="form-label">User</label>
+        <input type='text' name='username' id="1" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label for="2" class="form-label">Email address</label>
+        <input type='text' name='email' id="2" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="3" class="form-label">Password</label>
+        <input type='password' name='password' id="3" class="form-control"/>
+      </div>
+      <div class="mb-3">
+        <label for="4" class="form-label">Password</label>
+        <input type='password' name='password_confirm' id="4" class="form-control"/>
+      </div>
+      <div class="mb-3 form-check">
+        <input type='checkbox' name='user' id="5" class="form-check-input"/>
+        <label class="form-check-label" for="5">User</label>
+      </div>
+      <div class="mb-3 form-check">
+
+        <input type='checkbox' name='mod' id="6" class="form-check-input"/>
+        <label class="form-check-label" for="6">Mod</label>
+      </div>
+      <div class="mb-3 form-check">
+
+        <input type='checkbox' name='admin' id="7" class="form-check-input"/>
+        <label class="form-check-label" for="7">Admin</label>
+
+      </div>
+      <input name="submit" type="submit" value="submit" class="btn btn-primary"/>
     </form>
+
+
   </div>
 </div>
+
+</body>
+</html>
