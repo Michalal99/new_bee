@@ -1,0 +1,76 @@
+package com.bee.models;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
+
+@Entity
+@Table(name="meeting")
+public class Meeting {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Long id;
+
+    @NotBlank
+    private Long project_id;
+
+    @NotBlank
+    private String description;
+
+    @NotBlank
+    private LocalDate start_date;
+
+    @NotBlank
+    private int duration_in_minutes;
+
+    public Meeting(Long id, Long project_id, String description, LocalDate start_date, int duration_in_minutes) {
+        this.id = id;
+        this.project_id = project_id;
+        this.description = description;
+        this.start_date = start_date;
+        this.duration_in_minutes = duration_in_minutes;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getProject_id() {
+        return project_id;
+    }
+
+    public void setProject_id(Long project_id) {
+        this.project_id = project_id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
+    }
+
+    public int getDuration_in_minutes() {
+        return duration_in_minutes;
+    }
+
+    public void setDuration_in_minutes(int duration_in_minutes) {
+        this.duration_in_minutes = duration_in_minutes;
+    }
+}

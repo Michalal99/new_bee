@@ -5,8 +5,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="comment")
-public class Comment {
+@Table(name="kanban_dones")
+public class Kanban_done {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,18 +21,18 @@ public class Comment {
     private String description;
 
     @NotBlank
-    @Size(max=50)
-    private String user_id;
+    private Long kanbans_id;
 
     @NotBlank
-    private int project_id;
+    @Size(max=50)
+    private String users_id;
 
-    public Comment(Long id, String title, String description, String user_id, int project_id) {
+    public Kanban_done(Long id, String title, String description, Long kanbans_id, String users_id) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.user_id = user_id;
-        this.project_id = project_id;
+        this.kanbans_id = kanbans_id;
+        this.users_id = users_id;
     }
 
     public Long getId() {
@@ -59,19 +59,19 @@ public class Comment {
         this.description = description;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public Long getKanbans_id() {
+        return kanbans_id;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setKanbans_id(Long kanbans_id) {
+        this.kanbans_id = kanbans_id;
     }
 
-    public int getProject_id() {
-        return project_id;
+    public String getUsers_id() {
+        return users_id;
     }
 
-    public void setProject_id(int project_id) {
-        this.project_id = project_id;
+    public void setUsers_id(String users_id) {
+        this.users_id = users_id;
     }
 }
