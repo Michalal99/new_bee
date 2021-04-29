@@ -3,24 +3,41 @@ package com.bee.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="projects")
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
-    @NotBlank
-    @Size(max=20)
-    private Long team_id;
+    @ManyToOne
+    @JoinColumn(name="team_id", nullable = false)
+    private Team team;
 
     @NotBlank
     private String description;
 
-    public Project(Long id, Long team_id, String description) {
+    @OneToMany(mappedBy="project")
+    private Set<Meeting> meeting;
+
+    @OneToMany(mappedBy="project")
+    private Set<Brainstorm> brainstorm;
+
+    @OneToMany(mappedBy="project")
+    private List<Comment> comment;
+
+    @OneToOne(mappedBy="project")
+    private Kanban kanban;
+
+    public Project() {
+    }
+
+    public Project(Long id, String description) {
         this.id = id;
-        this.team_id = team_id;
         this.description = description;
     }
 
@@ -30,14 +47,6 @@ public class Project {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getTeam_id() {
-        return team_id;
-    }
-
-    public void setTeam_id(Long team_id) {
-        this.team_id = team_id;
     }
 
     public String getDescription() {

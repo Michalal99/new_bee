@@ -20,19 +20,26 @@ public class Kanban_todo {
     @NotBlank
     private String description;
 
-    @NotBlank
-    private Long kanbans_id;
+    //@NotBlank
+    //private Long kanbans_id;
+    @ManyToOne
+    @JoinColumn(name="kanban_id")
+    private Kanban kanban;
 
-    @NotBlank
-    @Size(max=50)
-    private String users_id;
+    //@NotBlank
+    //@Size(max=50)
+    //private String users_id;
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable = false)
+    private User user;
 
-    public Kanban_todo(Long id, String title, String description, Long kanbans_id, String users_id) {
+    public Kanban_todo() {
+    }
+
+    public Kanban_todo(Long id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.kanbans_id = kanbans_id;
-        this.users_id = users_id;
     }
 
     public Long getId() {
@@ -57,21 +64,5 @@ public class Kanban_todo {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getKanbans_id() {
-        return kanbans_id;
-    }
-
-    public void setKanbans_id(Long kanbans_id) {
-        this.kanbans_id = kanbans_id;
-    }
-
-    public String getUsers_id() {
-        return users_id;
-    }
-
-    public void setUsers_id(String users_id) {
-        this.users_id = users_id;
     }
 }

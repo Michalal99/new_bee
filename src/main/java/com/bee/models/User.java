@@ -5,10 +5,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(	name = "users",
+@Table(	name = "the_users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
@@ -16,6 +17,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
     @NotBlank
@@ -31,8 +33,23 @@ public class User {
     @Size(max = 120)
     private String password;
 
+    @OneToMany(mappedBy="user")
+    private Set<Kanban_done> kanban_done;
 
+    @OneToMany(mappedBy="user")
+    private Set<Kanban_inprogress> kanban_inprogress;
 
+    @OneToMany(mappedBy="user")
+    private Set<Kanban_todo> kanban_todo;
+
+    @OneToMany(mappedBy="user")
+    private Set<Grade> grade;
+
+    @OneToMany(mappedBy="user")
+    private Set<Comment> comment;
+
+    @OneToMany(mappedBy = "user")
+    private List<Team_member> team_member;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",

@@ -3,6 +3,7 @@ package com.bee.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name="brainstorms")
@@ -13,8 +14,9 @@ public class Brainstorm {
     @Column(nullable = false)
     private Long id;
 
-    @NotBlank
-    private Long project_id;
+    @ManyToOne
+    @JoinColumn(name="project_id")
+    private Project project;
 
     @NotBlank
     private String description;
@@ -23,9 +25,14 @@ public class Brainstorm {
     @Size(max=255)
     private String title;
 
-    public Brainstorm(Long id, Long project_id, String description, String title) {
+    @OneToMany(mappedBy="brainstorm")
+    private Set<Idea> idea;
+
+    public Brainstorm() {
+    }
+
+    public Brainstorm(Long id, String description, String title) {
         this.id = id;
-        this.project_id = project_id;
         this.description = description;
         this.title = title;
     }
@@ -36,14 +43,6 @@ public class Brainstorm {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getProject_id() {
-        return project_id;
-    }
-
-    public void setProject_id(Long project_id) {
-        this.project_id = project_id;
     }
 
     public String getDescription() {

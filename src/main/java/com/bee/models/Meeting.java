@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="meeting")
+@Table(name="meetings")
 public class Meeting {
 
     @Id
@@ -14,8 +14,9 @@ public class Meeting {
     @Column(nullable = false)
     private Long id;
 
-    @NotBlank
-    private Long project_id;
+    @ManyToOne
+    @JoinColumn(name="project_id")
+    private Project project;
 
     @NotBlank
     private String description;
@@ -26,9 +27,11 @@ public class Meeting {
     @NotBlank
     private int duration_in_minutes;
 
-    public Meeting(Long id, Long project_id, String description, LocalDate start_date, int duration_in_minutes) {
+    public Meeting() {
+    }
+
+    public Meeting(Long id, String description, LocalDate start_date, int duration_in_minutes) {
         this.id = id;
-        this.project_id = project_id;
         this.description = description;
         this.start_date = start_date;
         this.duration_in_minutes = duration_in_minutes;
@@ -40,14 +43,6 @@ public class Meeting {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getProject_id() {
-        return project_id;
-    }
-
-    public void setProject_id(Long project_id) {
-        this.project_id = project_id;
     }
 
     public String getDescription() {

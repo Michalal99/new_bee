@@ -13,20 +13,22 @@ public class Grade {
     @Column(nullable = false)
     private Long id;
 
-    @NotBlank
-    @Size(max=50)
-    private String user_id;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
-    @NotBlank
-    private Long idea_id;
+    @ManyToOne
+    @JoinColumn(name="idea_id")
+    private Idea idea;
 
     @NotBlank
     private Long grade;
 
-    public Grade(Long id, String user_id, Long idea_id, Long grade) {
+    public Grade() {
+    }
+
+    public Grade(Long id, Long grade) {
         this.id = id;
-        this.user_id = user_id;
-        this.idea_id = idea_id;
         this.grade = grade;
     }
 
@@ -36,22 +38,6 @@ public class Grade {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public Long getIdea_id() {
-        return idea_id;
-    }
-
-    public void setIdea_id(Long idea_id) {
-        this.idea_id = idea_id;
     }
 
     public Long getGrade() {

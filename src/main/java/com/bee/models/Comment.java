@@ -3,15 +3,20 @@ package com.bee.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
-@Table(name="comment")
+@Table(name="comments")
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="project_id")
+    private Project project;
 
     @NotBlank
     @Size(max=255)
@@ -20,19 +25,17 @@ public class Comment {
     @NotBlank
     private String description;
 
-    @NotBlank
-    @Size(max=50)
-    private String user_id;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
-    @NotBlank
-    private int project_id;
+    public Comment() {
+    }
 
-    public Comment(Long id, String title, String description, String user_id, int project_id) {
+    public Comment(Long id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.user_id = user_id;
-        this.project_id = project_id;
     }
 
     public Long getId() {
@@ -59,19 +62,4 @@ public class Comment {
         this.description = description;
     }
 
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public int getProject_id() {
-        return project_id;
-    }
-
-    public void setProject_id(int project_id) {
-        this.project_id = project_id;
-    }
 }
