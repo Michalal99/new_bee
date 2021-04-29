@@ -9,6 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.AttributeConverter;
 import java.security.InvalidKeyException;
 import java.security.Key;
+import java.security.Timestamp;
 import java.util.Base64;
 
 @Component

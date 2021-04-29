@@ -1,5 +1,7 @@
 package com.bee.payload.request;
 
+import com.bee.security.constraint.ValidPassword;
+
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
@@ -7,6 +9,7 @@ public class LoginRequest {
     private String username;
 
     @NotBlank
+    @ValidPassword
     private String password;
 
     public String getUsername() {

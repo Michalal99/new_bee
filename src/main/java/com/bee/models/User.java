@@ -1,5 +1,7 @@
 package com.bee.models;
 
+import com.bee.security.constraint.ValidPassword;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -28,8 +30,12 @@ public class User {
     private String email;
 
     @NotBlank
-    @Size(max = 120)
+    //@Size(max = 120)
+   // @ValidPassword
+    //@Convert(converter = AttributeEncryptor.class)
     private String password;
+
+   // private String passwordEncoded;
 
 
 
@@ -88,4 +94,7 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+//    public String getPasswordEncoded() { return passwordEncoded; }
+//
+//    public void setPasswordEncoded(String passwordEncoded) { this.passwordEncoded = passwordEncoded; }
 }
