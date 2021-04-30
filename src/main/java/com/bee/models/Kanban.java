@@ -16,13 +16,13 @@ public class Kanban {
     @NotBlank
     private Long projects_id;
 
-    @OneToMany(mappedBy="kanban")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="kanban", orphanRemoval = true)
     private Set<Kanban_done> kanban_done;
 
-    @OneToMany(mappedBy="kanban")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="kanban", orphanRemoval = true)
     private Set<Kanban_inprogress> kanban_inprogress;
 
-    @OneToMany(mappedBy="kanban")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="kanban", orphanRemoval = true)
     private Set<Kanban_todo> kanban_todo;
 
     @OneToOne(cascade=CascadeType.ALL)

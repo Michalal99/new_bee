@@ -18,10 +18,10 @@ public class Team {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="team", orphanRemoval = true)
     private List<Team_member> team_member;
 
-    @OneToMany(mappedBy="team")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="team", orphanRemoval = true)
     private Set<Project> project;
 
     public Team() {

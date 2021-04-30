@@ -1,5 +1,8 @@
 package com.bee.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -25,7 +28,7 @@ public class Idea {
     @NotBlank
     private String text;
 
-    @OneToMany(mappedBy="idea")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="idea", orphanRemoval = true)
     private Set<Grade> grade;
 
     public Idea() {

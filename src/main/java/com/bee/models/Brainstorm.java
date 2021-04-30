@@ -1,8 +1,13 @@
 package com.bee.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,9 +29,9 @@ public class Brainstorm {
     @NotBlank
     @Size(max=255)
     private String title;
-
-    @OneToMany(mappedBy="brainstorm")
-    private Set<Idea> idea;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="brainstorm", orphanRemoval = true)
+    private List<Idea> idea;
 
     public Brainstorm() {
     }

@@ -21,10 +21,10 @@ public class Project {
     @NotBlank
     private String description;
 
-    @OneToMany(mappedBy="project")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="project", orphanRemoval = true)
     private Set<Meeting> meeting;
 
-    @OneToMany(mappedBy="project")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="project", orphanRemoval = true)
     private Set<Brainstorm> brainstorm;
 
     @OneToMany(mappedBy="project")

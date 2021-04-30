@@ -33,22 +33,22 @@ public class User {
     @Size(max = 120)
     private String password;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
     private Set<Kanban_done> kanban_done;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
     private Set<Kanban_inprogress> kanban_inprogress;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
     private Set<Kanban_todo> kanban_todo;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
     private Set<Grade> grade;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
     private Set<Comment> comment;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
     private List<Team_member> team_member;
 
     @ManyToMany(fetch = FetchType.LAZY)
