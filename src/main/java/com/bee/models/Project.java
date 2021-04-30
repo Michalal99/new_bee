@@ -30,7 +30,7 @@ public class Project {
     @OneToMany(mappedBy="project")
     private List<Comment> comment;
 
-    @OneToOne(mappedBy="project")
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy="project", orphanRemoval = true)
     private Kanban kanban;
 
     public Project() {

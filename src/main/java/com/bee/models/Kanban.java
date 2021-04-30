@@ -13,9 +13,6 @@ public class Kanban {
     @Column(nullable = false)
     private Long id;
 
-    @NotBlank
-    private Long projects_id;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy="kanban", orphanRemoval = true)
     private Set<Kanban_done> kanban_done;
 
@@ -32,9 +29,8 @@ public class Kanban {
     public Kanban() {
     }
 
-    public Kanban(Long id, Long projects_id) {
+    public Kanban(Long id) {
         this.id = id;
-        this.projects_id = projects_id;
     }
 
     public Long getId() {
@@ -43,13 +39,5 @@ public class Kanban {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getProjects_id() {
-        return projects_id;
-    }
-
-    public void setProjects_id(Long projects_id) {
-        this.projects_id = projects_id;
     }
 }
