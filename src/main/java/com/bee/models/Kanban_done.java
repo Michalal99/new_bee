@@ -60,4 +60,20 @@ public class Kanban_done {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Kanban getKanban() {
+        return kanban;
+    }
+
+    public void setKanban(Kanban kanban) {
+        this.kanban = kanban;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

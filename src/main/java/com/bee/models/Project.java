@@ -36,9 +36,10 @@ public class Project {
     public Project() {
     }
 
-    public Project(Long id, String description) {
+    public Project(Long id, String description, Team team) {
         this.id = id;
         this.description = description;
+        this.team = team;
     }
 
     public Long getId() {
@@ -55,5 +56,45 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Set<Meeting> getMeeting() {
+        return meeting;
+    }
+
+    public void setMeeting(Set<Meeting> meeting) {
+        this.meeting = meeting;
+    }
+
+    public Set<Brainstorm> getBrainstorm() {
+        return brainstorm;
+    }
+
+    public void setBrainstorm(Set<Brainstorm> brainstorm) {
+        this.brainstorm = brainstorm;
+    }
+
+    public List<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<Comment> comment) {
+        this.comment = comment;
+    }
+
+    public Kanban getKanban() {
+        return kanban;
+    }
+
+    public void setKanban(Kanban kanban) {
+        this.kanban = kanban;
     }
 }

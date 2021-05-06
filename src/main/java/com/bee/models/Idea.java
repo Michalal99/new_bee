@@ -63,4 +63,20 @@ public class Idea {
     public void setText(String text) {
         this.text = text;
     }
+
+    public Brainstorm getBrainstorm() {
+        return brainstorm;
+    }
+
+    public void setBrainstorm(Brainstorm brainstorm) {
+        this.brainstorm = brainstorm;
+    }
+
+    public Set<Grade> getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Set<Grade> grade) {
+        this.grade = grade;
+    }
 }

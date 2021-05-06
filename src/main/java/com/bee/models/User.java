@@ -105,4 +105,52 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public Set<Kanban_done> getKanban_done() {
+        return kanban_done;
+    }
+
+    public void setKanban_done(Set<Kanban_done> kanban_done) {
+        this.kanban_done = kanban_done;
+    }
+
+    public Set<Kanban_inprogress> getKanban_inprogress() {
+        return kanban_inprogress;
+    }
+
+    public void setKanban_inprogress(Set<Kanban_inprogress> kanban_inprogress) {
+        this.kanban_inprogress = kanban_inprogress;
+    }
+
+    public Set<Kanban_todo> getKanban_todo() {
+        return kanban_todo;
+    }
+
+    public void setKanban_todo(Set<Kanban_todo> kanban_todo) {
+        this.kanban_todo = kanban_todo;
+    }
+
+    public Set<Grade> getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Set<Grade> grade) {
+        this.grade = grade;
+    }
+
+    public Set<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(Set<Comment> comment) {
+        this.comment = comment;
+    }
+
+    public List<Team_member> getTeam_member() {
+        return team_member;
+    }
+
+    public void setTeam_member(List<Team_member> team_member) {
+        this.team_member = team_member;
+    }
 }

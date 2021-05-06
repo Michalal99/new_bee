@@ -40,4 +40,36 @@ public class Kanban {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Set<Kanban_done> getKanban_done() {
+        return kanban_done;
+    }
+
+    public void setKanban_done(Set<Kanban_done> kanban_done) {
+        this.kanban_done = kanban_done;
+    }
+
+    public Set<Kanban_inprogress> getKanban_inprogress() {
+        return kanban_inprogress;
+    }
+
+    public void setKanban_inprogress(Set<Kanban_inprogress> kanban_inprogress) {
+        this.kanban_inprogress = kanban_inprogress;
+    }
+
+    public Set<Kanban_todo> getKanban_todo() {
+        return kanban_todo;
+    }
+
+    public void setKanban_todo(Set<Kanban_todo> kanban_todo) {
+        this.kanban_todo = kanban_todo;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 }

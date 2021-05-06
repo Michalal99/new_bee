@@ -47,4 +47,20 @@ public class Grade {
     public void setGrade(Long grade) {
         this.grade = grade;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Idea getIdea() {
+        return idea;
+    }
+
+    public void setIdea(Idea idea) {
+        this.idea = idea;
+    }
 }

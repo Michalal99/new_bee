@@ -65,5 +65,19 @@ public class Team {
                 '}';
     }
 
+    public List<Team_member> getTeam_member() {
+        return team_member;
+    }
 
+    public void setTeam_member(List<Team_member> team_member) {
+        this.team_member = team_member;
+    }
+
+    public Set<Project> getProject() {
+        return project;
+    }
+
+    public void setProject(Set<Project> project) {
+        this.project = project;
+    }
 }

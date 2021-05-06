@@ -68,4 +68,12 @@ public class Meeting {
     public void setDuration_in_minutes(int duration_in_minutes) {
         this.duration_in_minutes = duration_in_minutes;
     }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 }

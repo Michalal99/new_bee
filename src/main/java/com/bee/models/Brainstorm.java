@@ -65,4 +65,20 @@ public class Brainstorm {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public List<Idea> getIdea() {
+        return idea;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public void setIdea(List<Idea> idea) {
+        this.idea = idea;
+    }
 }
