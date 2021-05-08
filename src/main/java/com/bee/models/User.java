@@ -1,11 +1,12 @@
 package com.bee.models;
 
+import com.bee.security.constraint.ValidPassword;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,7 +18,6 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long id;
 
     @NotBlank
@@ -30,26 +30,12 @@ public class User {
     private String email;
 
     @NotBlank
-    @Size(max = 120)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
-    private Set<Kanban_done> kanban_done;
+   // private String token;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
-    private Set<Kanban_inprogress> kanban_inprogress;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
-    private Set<Kanban_todo> kanban_todo;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
-    private Set<Grade> grade;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
-    private Set<Comment> comment;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user", orphanRemoval = true)
-    private List<Team_member> team_member;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
@@ -64,6 +50,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+
     }
 
     public Long getId() {
@@ -106,51 +93,18 @@ public class User {
         this.roles = roles;
     }
 
-    public Set<Kanban_done> getKanban_done() {
-        return kanban_done;
+    @Override
+    public boolean equals(Object obj) {
+
+        User user = (User)obj;
+        int x = user.getEmail().compareTo(this.email)
+                + user.getUsername().compareTo(this.username) +
+                user.getPassword().compareTo(this.password);
+        return x == 0;
+
     }
 
-    public void setKanban_done(Set<Kanban_done> kanban_done) {
-        this.kanban_done = kanban_done;
-    }
-
-    public Set<Kanban_inprogress> getKanban_inprogress() {
-        return kanban_inprogress;
-    }
-
-    public void setKanban_inprogress(Set<Kanban_inprogress> kanban_inprogress) {
-        this.kanban_inprogress = kanban_inprogress;
-    }
-
-    public Set<Kanban_todo> getKanban_todo() {
-        return kanban_todo;
-    }
-
-    public void setKanban_todo(Set<Kanban_todo> kanban_todo) {
-        this.kanban_todo = kanban_todo;
-    }
-
-    public Set<Grade> getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Set<Grade> grade) {
-        this.grade = grade;
-    }
-
-    public Set<Comment> getComment() {
-        return comment;
-    }
-
-    public void setComment(Set<Comment> comment) {
-        this.comment = comment;
-    }
-
-    public List<Team_member> getTeam_member() {
-        return team_member;
-    }
-
-    public void setTeam_member(List<Team_member> team_member) {
-        this.team_member = team_member;
-    }
+    //    public String getPasswordEncoded() { return passwordEncoded; }
+//
+//    public void setPasswordEncoded(String passwordEncoded) { this.passwordEncoded = passwordEncoded; }
 }
