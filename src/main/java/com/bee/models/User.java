@@ -30,12 +30,9 @@ public class User {
     private String email;
 
     @NotBlank
-    //@Size(max = 120)
-   // @ValidPassword
-    //@Convert(converter = AttributeEncryptor.class)
     private String password;
 
-   // private String passwordEncoded;
+   // private String token;
 
 
 
@@ -53,6 +50,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+
     }
 
     public Long getId() {
@@ -94,7 +92,19 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-//    public String getPasswordEncoded() { return passwordEncoded; }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        User user = (User)obj;
+        int x = user.getEmail().compareTo(this.email)
+                + user.getUsername().compareTo(this.username) +
+                user.getPassword().compareTo(this.password);
+        return x == 0;
+
+    }
+
+    //    public String getPasswordEncoded() { return passwordEncoded; }
 //
 //    public void setPasswordEncoded(String passwordEncoded) { this.passwordEncoded = passwordEncoded; }
 }

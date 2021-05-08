@@ -3,20 +3,26 @@ package com.bee.controller;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.bee.exception.EmailNotExistException;
 import com.bee.models.ERole;
 import com.bee.models.Role;
 import com.bee.models.User;
 import com.bee.payload.request.LoginRequest;
+import com.bee.payload.request.PasswordChangeRequest;
 import com.bee.payload.request.SignupRequest;
+import com.bee.repository.PasswordResetTokenRepository;
 import com.bee.repository.RoleRepository;
 import com.bee.repository.UserRepository;
-import com.bee.security.constraint.ValidPassword;
+import com.bee.security.PasswordTokenSecurity;
 import com.bee.security.jwt.JwtUtils;
 import com.bee.security.services.UserDetailsImpl;
+import com.bee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,7 +32,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -49,13 +54,19 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @ValidPassword
-    String pass;
+    @Autowired
+    UserService userService;
 
-//    @ValidPassword
-//    String pass;
+    @Autowired
+    JavaMailSenderImpl mailSender;
 
-    //public ResponseEntity<?> logout ()
+//    @Autowired
+//    PasswordTokenSecurity passwordTokenSecurity;
+
+    @Autowired
+    PasswordResetTokenRepository passwordResetTokenRepository;
+
+
     @RequestMapping(value="/logout", method=RequestMethod.GET)
     public String logoutPage(HttpSession session ) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -70,7 +81,47 @@ public class AuthController {
         var user = jwtUtils.getUserNameFromJwtToken((String)y);
         return "hello";
     }
+    @GetMapping("/forget")
+    public String passwordForget(){
+        return "forgotPassword";
+    }
 
+    @PostMapping("/forget")
+    public String sendEmailToUser(HttpServletRequest request, @RequestParam String email)
+    {
+       var Optuser = userRepository.findByEmail(email);
+       if(Optuser.isEmpty())
+           throw new EmailNotExistException();
+       var user = Optuser.get();
+        String token = UUID.randomUUID().toString();
+        userService.createPasswordResetTokenForUser(user, token);
+        mailSender.send(userService.constructResetTokenEmail("/api/auth", request.getLocale(), token, user));
+
+        return "redirect:/api/auth/login";
+    }
+
+
+    @PostMapping("/changePassword")
+    public String changePassword(@ModelAttribute("passwordChangeRequest")  @Valid  PasswordChangeRequest passwordChangeRequest,
+                                 RedirectAttributes redirectAttributes,
+                                 HttpSession session,
+                                 HttpServletRequest request)
+    {
+
+
+        if(passwordChangeRequest.getPassword().compareTo(passwordChangeRequest.getPassword_confirm()) != 0)
+        {
+            redirectAttributes.addFlashAttribute("error","Password must be the same!");
+            return "redirect:"+request.getRequestURL() + "?token=" + session.getAttribute("changePasswordToken");
+        }
+
+        var test = passwordResetTokenRepository.findByToken((String)session.getAttribute("changePasswordToken"));
+        var myUser = test.getUser();
+        myUser.setPassword(encoder.encode(passwordChangeRequest.getPassword()));
+        userRepository.save(myUser);
+
+        return "redirect:/api/auth/login";
+    }
 
     @PostMapping("/signin")
     //public ResponseEntity<?> authenticateUser(@Valid @RequestBody String httpResponse, ModelMap user)
