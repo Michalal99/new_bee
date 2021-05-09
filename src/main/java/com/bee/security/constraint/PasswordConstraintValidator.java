@@ -28,6 +28,11 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
         if (result.isValid()) {
             return true;
         }
+//        buildConstraintViolation(context, validator, result);
+        return false;
+    }
+
+    public void buildConstraintViolation(ConstraintValidatorContext context, PasswordValidator validator, RuleResult result) {
         List<String> messages = validator.getMessages(result);
 
         String messageTemplate = messages.stream()
@@ -35,6 +40,5 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
         context.buildConstraintViolationWithTemplate(messageTemplate)
                 .addConstraintViolation()
                 .disableDefaultConstraintViolation();
-        return false;
     }
 }
