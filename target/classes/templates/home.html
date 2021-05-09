@@ -20,43 +20,48 @@
 
 <body>
 
-<nav class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
-        </a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Tour</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Product</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Features</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Enterprise</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Support</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Pricing</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Cart</a>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link font-weight-bold" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <div class="d-grid gap-3">
+            <a class="btn btn-outline-success" href="/api/auth/login">Login</a>
+            <a class="btn btn-outline-success" href="/api/auth/signup">Create an account</a>
+        </div>
     </div>
 </nav>
 
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">Bee app</h1>
-        <p class="lead font-weight-normal">Make your work easier with project management in Bee</p>
-        <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+<!--<div style="background-image: url('data:image/jpeg;base64,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');">-->
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center border bg-secondary">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 font-weight-normal font-weight-bold text-white">Bee app</h1>
+            <p class="lead font-weight-normal text-white">Make your work easier with project management in Bee</p>
+            <a class="btn btn-success" href="#">Get started!</a>
+        </div>
     </div>
-    <div class="product-device box-shadow d-none d-md-block"></div>
-    <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
-</div>
+
+<!--</div>-->
 
 <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
     <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
         <div class="my-3 py-3">
-            <h2 class="display-5">Another headline</h2>
-            <p class="lead">And an even wittier subheading.</p>
+            <h2 class="display-5">Make Kanban tables</h2>
+            <p class="lead">With our great new tools.</p>
         </div>
         <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
     </div>
     <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
         <div class="my-3 p-3">
-            <h2 class="display-5">Another headline</h2>
-            <p class="lead">And an even wittier subheading.</p>
+            <h2 class="display-5">Manage teams.</h2>
+            <p class="lead">With our new calendar.</p>
         </div>
         <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
     </div>
@@ -65,15 +70,15 @@
 <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
     <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
         <div class="my-3 p-3">
-            <h2 class="display-5">Another headline</h2>
-            <p class="lead">And an even wittier subheading.</p>
+            <h2 class="display-5">Create projects.</h2>
+            <p class="lead">And manage them efficiently.</p>
         </div>
         <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
     </div>
     <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
         <div class="my-3 py-3">
-            <h2 class="display-5">Another headline</h2>
-            <p class="lead">And an even wittier subheading.</p>
+            <h2 class="display-5">Use a brainstorming tool.</h2>
+            <p class="lead">And much more yet to come...</p>
         </div>
         <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
     </div>
@@ -84,47 +89,24 @@
     <div class="row">
         <div class="col-12 col-md">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mb-2"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
-            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+            <small class="d-block mb-3 text-muted">&copy; 2021</small>
         </div>
         <div class="col-6 col-md">
-            <h5>Resources</h5>
+            <h5>Support</h5>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Resource</a></li>
-                <li><a class="text-muted" href="#">Resource name</a></li>
+                <li><a class="text-muted" href="#">Online assistance</a></li>
+                <li><a class="text-muted" href="#">FAQ</a></li>
             </ul>
         </div>
         <div class="col-6 col-md">
-            <h5>Resources</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Business</a></li>
-                <li><a class="text-muted" href="#">Education</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md">
-            <h5>About</h5>
+            <h5>About us</h5>
             <ul class="list-unstyled text-small">
                 <li><a class="text-muted" href="#">Team</a></li>
-                <li><a class="text-muted" href="#">Terms</a></li>
+                <li><a class="text-muted" href="#">Bee inc.</a></li>
             </ul>
         </div>
     </div>
 </footer>
 
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="../../assets/js/vendor/popper.min.js"></script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<script src="../../assets/js/vendor/holder.min.js"></script>
-<script>
-      Holder.addTheme('thumb', {
-        bg: '#55595c',
-        fg: '#eceeef',
-        text: 'Thumbnail'
-      });
-    </script>
 </body>
 </html>
