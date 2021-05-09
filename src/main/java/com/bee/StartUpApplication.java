@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-public class StartUpApplication {
+public class  StartUpApplication {
 
 //    @Autowired
 //    private RoleRepository roleRepository;

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Bee</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="grid-container">
+    <div class="Center">
+        <div class="container">
+            <div class="row">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Comment title</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="comment : ${comments}">
+                        <td th:text="${comment.id}"></td>
+                        <td th:text="${#strings.capitalize(comment.title)}"></td>
+                        <td th:text="${#strings.capitalize(comment.description)}"></td>
+                        <td><a th:href="@{/comments/{commentId}(commentId = ${comment.id})}" class="btn btn-info">Details</a></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><a th:href="@{/teams/create}" class="btn btn-success">Create</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+</body>
+</html>
+

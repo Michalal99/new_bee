@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Bee</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="grid-container">
+    <div class="Center">
+        <form th:action="@{/comments}" method="post" th:object="${comment}" >
+            <div class="mb-3">
+                <label for="title" class="form-label">Comment title</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Content</label>
+                <input type="text" class="form-control" id="description" th:field="*{description}">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>

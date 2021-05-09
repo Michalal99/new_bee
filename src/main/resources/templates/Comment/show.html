@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Bee</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="grid-container">
+    <div class="Center">
+        <div class="card text-center">
+            <div class="card-header">
+                Comment
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${#strings.capitalize(comment.title)}"></h5>
+                <p class="card-text" th:text="${#strings.capitalize(comment.description)}"></p>
+                <a th:href="@{/comments/edit/{commentId}(commentId = ${comment.id})}" class="btn btn-warning">Edit</a>
+                <a th:href="@{/comments/delete/{commentId}(commentId = ${comment.id})}" class="btn btn-danger">Delete</a>
+            </div>
+            <div class="card-footer text-muted">
+                Comment
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
+
