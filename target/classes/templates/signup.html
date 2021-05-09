@@ -1,57 +1,85 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="ISO-8859-1">
-  <title>Bee</title>
-  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-  <link th:href="@{/css/main.css}" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Signup</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/main.css}" rel="stylesheet">
 </head>
-<h1 th:text="${error}"> </h1>
-<div class="grid-container">
-  <div class="Center">
-<!--    <form name='myform' action="/api/auth/signup" method='POST' >-->
-      <form th:action="@{/api/auth/signup}" method="post" th:object="${signupRequest}" >
-      <table>
+
+<body class="text-center">
+
+<!--<form th:action="@{/api/auth/signup}" method="post" th:object="${signupRequest}" >
+    <table>
         <tr>
-          <td>User:</td>
-          <td><input type='text' name='username' id="1" th:field ="*{username}"></td>
+            <td>User:</td>
 
         </tr>
         <tr>
-          <td>Email:</td>
-          <td><input type='text' name='email' id="2" th:field="*{email}"></td>
+            <td>Email:</td>
+            <td><input type='text' name='email' id="2" th:field="*{email}"></td>
         </tr>
         <tr>
-          <td>Password:</td>
-          <td><input type='password' name='password' id="3" th:field = "*{password}" /></td>
+            <td>Password:</td>
+            <td><input type='password' name='password' id="3" th:field = "*{password}" /></td>
         </tr>
         <tr>
-          <td>Confirm Password:</td>
-          <td><input type='password' name='password_confirm' id="4" th:field = "*{password_confirm}"/></td>
+            <td>Confirm Password:</td>
+            <td><input type='password' name='password_confirm' id="4" th:field = "*{password_confirm}"/></td>
         </tr>
-       <tr>
-         <td><input type="radio" th:field="*{role}" id="user" value="user"> User</td>
-         <td><input type="radio" th:field="*{role}" id="mod" value="mod"> Mod</td>
-         <td><input type="radio" th:field="*{role}" id="admin" value="admin"> Admin</td>
+        <tr>
+            <td><input type="radio" th:field="*{role}" id="user" value="user"> User</td>
+            <td><input type="radio" th:field="*{role}" id="mod" value="mod"> Mod</td>
+            <td><input type="radio" th:field="*{role}" id="admin" value="admin"> Admin</td>
 
-       </tr>
-<!--        <tr>-->
-<!--          <td>user:</td>-->
-<!--          <td><input type='checkbox' name='user' id="5" /></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--          <td>mod:</td>-->
-<!--          <td><input type='checkbox' name='mod' id="6" /></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--          <td>admin:</td>-->
-<!--          <td><input type='checkbox' name='admin' id="7" /></td>-->
-<!--        </tr>-->
-        <tr>
-          <td><input  type="submit" value="submit" /></td>
         </tr>
-      </table>
-    </form>
-  </div>
-</div>
+        <tr>
+            <td><input  type="submit" value="submit" /></td>
+        </tr>
+    </table>
+</form>-->
+
+
+
+<form th:action="@{/api/auth/signup}" method="post" th:object="${signupRequest}" >
+    <img class="mb-4" src="https://www.kindpng.com/picc/m/303-3031525_svg-icon-free-download-free-bee-icon-png.png" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Create an account</h1>
+
+
+    <label for="1" class="sr-only">Username</label>
+    <input type="text" id="1" class="form-control" name='username' placeholder="Username" th:field ="*{username}" required autofocus>
+
+
+    <label for="2" class="sr-only">Email</label>
+    <input type="text" id="2" class="form-control" name='email' placeholder="Email" th:field ="*{email}" required autofocus>
+    <!--    <td><input type='text' name='email' id="2" th:field="*{email}"></td>-->
+
+
+    <label for="3" class="sr-only">Password</label>
+    <input type="password" id="3" name='password' class="form-control" placeholder="Password" th:field = "*{password}" required>
+
+    <label for="4" class="sr-only">Password</label>
+    <input type="password" id="4" name='password_confirm' class="form-control" placeholder="Password Confirm" th:field = "*{password_confirm}" required>
+
+    <br/>
+
+    <td><input type="radio" th:field="*{role}" id="user" value="user"> User</td>
+    <td><input type="radio" th:field="*{role}" id="mod" value="mod"> Mod</td>
+    <td><input type="radio" th:field="*{role}" id="admin" value="admin"> Admin</td>
+
+    <input name="Sign in" type="submit" value="Submit" class="btn btn-lg btn-primary btn-block"/>
+    <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+</form>
+</body>
+</html>

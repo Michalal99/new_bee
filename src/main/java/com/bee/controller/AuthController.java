@@ -74,6 +74,7 @@ public class AuthController {
         session.invalidate();
         return "redirect:/api/auth/login";
     }
+
     @RequestMapping(value="/welcome", method = RequestMethod.GET)
     public String printWelcome(ModelMap model   ) {
 
@@ -81,6 +82,7 @@ public class AuthController {
         var user = jwtUtils.getUserNameFromJwtToken((String)y);
         return "hello";
     }
+
     @GetMapping("/forget")
     public String passwordForget(){
         return "forgotPassword";
