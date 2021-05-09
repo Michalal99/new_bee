@@ -1,3 +1,58 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+
+<body class="text-center">
+<!--<form th:action="@{/api/auth/signin}" method="post" th:object="${loginRequest}" >
+        <table>
+            <tr>
+                <td>User:</td>
+                <td><input type='text' name='username' id="1" th:field ="*{username}"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type='password' name='password' id="2" th:field = "*{password}" /></td>
+            </tr>
+            <tr>
+                <td><input name="submit" type="submit" value="submit" /></td>
+            </tr>
+        </table>
+    </form>-->
+<form th:action="@{/api/auth/signin}" method="post" th:object="${loginRequest}" >
+    <img class="mb-4" src="https://www.kindpng.com/picc/m/303-3031525_svg-icon-free-download-free-bee-icon-png.png" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="1" class="sr-only">Email address</label>
+    <input type="text" id="1" class="form-control" placeholder="Username" th:field ="*{username}" required autofocus>
+<!--    <input type='text' name='username' id="1" th:field ="*{username}">-->
+    <label for="2" class="sr-only">Password</label>
+    <input type="password" id="2" class="form-control" placeholder="Password" th:field = "*{password}" required>
+<!--    <input type='password' name='password' id="2" th:field = "*{password}" />-->
+
+<!--    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
+    <br/>
+    <input name="Sign in" type="submit" value="submit" class="btn btn-lg btn-primary btn-block"/>
+    <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+</form>
+</body>
+</html>
+
+<!--
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -10,7 +65,7 @@
 <div class="grid-container">
     <div class="Center">
         <h1>Login</h1>
-<!--        <form name='myform' action="/api/auth/signin" method='POST'>-->
+&lt;!&ndash;        <form name='myform' action="/api/auth/signin" method='POST'>&ndash;&gt;
         <form th:action="@{/api/auth/signin}" method="post" th:object="${loginRequest}" >
             <table>
                 <tr>
@@ -26,10 +81,10 @@
                 </tr>
             </table>
         </form>
-<!--        <a th:href="@{/api/auth/forget}"-->
-<!--           th:text="Forget your password?">reset</a>-->
+&lt;!&ndash;        <a th:href="@{/api/auth/forget}"&ndash;&gt;
+&lt;!&ndash;           th:text="Forget your password?">reset</a>&ndash;&gt;
 
         <a href="/api/auth/forget">Forget Password ?</a>
 
     </div>
-</div>
+</div>-->
