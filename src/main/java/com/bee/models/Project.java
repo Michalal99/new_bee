@@ -16,13 +16,13 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name="team_id", nullable = true)
-    private final Team team = new Team();
+    private Team team;
 
     @NotBlank
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="project", orphanRemoval = true)
-    private final Set<Meeting> meeting = new HashSet<>();
+    private Set<Meeting> meeting = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="project", orphanRemoval = true)
     private final Set<Brainstorm> brainstorm = new HashSet<>();
@@ -62,8 +62,9 @@ public class Project {
     }
 
     public void setTeam(Team team) {
-        this.team.setDescription(team.getDescription());
-        this.team.setName(team.getName());
+        this.team = team;
+        //this.team.setDescription(team.getDescription());
+        //this.team.setName(team.getName());
     }
 
     public Set<Meeting> getMeeting() {
