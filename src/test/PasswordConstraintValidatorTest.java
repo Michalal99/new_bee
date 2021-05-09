@@ -12,10 +12,9 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PasswordConstraintValidatorTest {
-    private static final String NULL = "" ;
+    private static final String NULL = "";
     @InjectMocks
     PasswordConstraintValidator passwordConstraintValidator;
-
 
 
     @Test
@@ -109,4 +108,5 @@ public class PasswordConstraintValidatorTest {
     private ConstraintValidatorContextImpl getExampleConstraintValidatorContext() {
         return new ConstraintValidatorContextImpl(null, null, null, null, null);
     }
+
 }
