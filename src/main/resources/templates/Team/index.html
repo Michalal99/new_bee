@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Teams</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
@@ -47,13 +47,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/teams">
                             <span data-feather="file"></span>
                             Teams
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/projects">
                             <span data-feather="file"></span>
                             Projects
                         </a>
@@ -120,56 +120,3 @@
 
 </body>
 </html>
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="ISO-8859-1">-->
-<!--    <title>Bee</title>-->
-<!--    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">-->
-<!--    <link th:href="@{/css/main.css}" rel="stylesheet">-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<div class="grid-container">-->
-<!--    <div class="Center">-->
-<!--        <div class="container">-->
-<!--            <div class="row">-->
-<!--                <table class="table">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th scope="col">#</th>-->
-<!--                        <th scope="col">Team name</th>-->
-<!--                        <th scope="col">Team description</th>-->
-<!--                        <th scope="col">Details</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    <tr th:each="team : ${teams}">-->
-<!--                        <td th:text="${team.id}"></td>-->
-<!--                        <td th:text="${#strings.capitalize(team.name)}"></td>-->
-<!--                        <td th:text="${#strings.capitalize(team.description)}"></td>-->
-<!--                        <td><a th:href="@{/teams/{teamId}(teamId = ${team.id})}" class="btn btn-info">Details</a></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td></td>-->
-<!--                        <td></td>-->
-<!--                        <td></td>-->
-<!--                        <td><a th:href="@{/teams/create}" class="btn btn-success">Create</a></td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--</body>-->
-<!--</html>-->
-
