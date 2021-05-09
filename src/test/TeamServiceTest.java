@@ -10,7 +10,7 @@ import com.bee.service.TeamService;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -52,10 +52,10 @@ public class TeamServiceTest {
         Team team = new Team("eee", "ppp");
 
 //        when(teamRepo.findTeamById(team.getId())).thenReturn(Optional.of(team));
-        when(teamRepo.findTeamById(team.getId()+1)).thenReturn(null);
+        when(teamRepo.findTeamById(team.getId() + 1)).thenReturn(null);
 
 //        when(teamService.addTeam(team)).thenCallRealMethod();
-        teamService.findTeamById(team.getId()+1);
+        teamService.findTeamById(team.getId() + 1);
 
     }
 
@@ -81,5 +81,25 @@ public class TeamServiceTest {
         teamService.deleteTeam(team);
 
         verify(teamRepo).delete(team);
+    }
+
+    @Test
+    public void shouldReturnTeamNameFromTeamRepo() {
+        Team team = new Team("eee", "ppp");
+        assertNotNull(team);
+        teamService.addTeam(team);
+        verify(teamRepo).save(team);
+    }
+
+    @Test()
+    public void shouldNotFindTeamByWrongId() {
+        Team team = new Team("eee", "ppp");
+        Team team1 = new Team("eee1", "ppp");
+        when(teamRepo.findTeamById(team.getId())).thenReturn(Optional.of(team));
+//        when(teamRepo.findTeamById(team.getId()+1)).thenReturn(null);
+
+
+//        when(teamService.addTeam(team)).thenCallRealMethod();
+        assertNotEquals(team, team1);
     }
 }
