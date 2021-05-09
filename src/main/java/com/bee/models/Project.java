@@ -2,7 +2,7 @@ package com.bee.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,17 +15,17 @@ public class Project {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="team_id", nullable = false)
-    private Team team;
+    @JoinColumn(name="team_id", nullable = true)
+    private final Team team = new Team();
 
     @NotBlank
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="project", orphanRemoval = true)
-    private Set<Meeting> meeting;
+    private final Set<Meeting> meeting = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="project", orphanRemoval = true)
-    private Set<Brainstorm> brainstorm;
+    private final Set<Brainstorm> brainstorm = new HashSet<>();
 
     @OneToMany(mappedBy="project")
     private List<Comment> comment;
@@ -36,10 +36,9 @@ public class Project {
     public Project() {
     }
 
-    public Project(Long id, String description, Team team) {
+    public Project(Long id, String description) {
         this.id = id;
         this.description = description;
-        this.team = team;
     }
 
     public Long getId() {
@@ -63,7 +62,8 @@ public class Project {
     }
 
     public void setTeam(Team team) {
-        this.team = team;
+        this.team.setDescription(team.getDescription());
+        this.team.setName(team.getName());
     }
 
     public Set<Meeting> getMeeting() {
@@ -71,7 +71,8 @@ public class Project {
     }
 
     public void setMeeting(Set<Meeting> meeting) {
-        this.meeting = meeting;
+        this.meeting.retainAll(meeting);
+        this.meeting.addAll(meeting);
     }
 
     public Set<Brainstorm> getBrainstorm() {
@@ -79,7 +80,8 @@ public class Project {
     }
 
     public void setBrainstorm(Set<Brainstorm> brainstorm) {
-        this.brainstorm = brainstorm;
+        this.brainstorm.retainAll(brainstorm);
+        this.brainstorm.addAll(brainstorm);
     }
 
     public List<Comment> getComment() {
