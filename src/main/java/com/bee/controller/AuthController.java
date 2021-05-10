@@ -72,7 +72,7 @@ public class AuthController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         var test = session.getId();
         session.invalidate();
-        return "redirect:/api/auth/login";
+        return "redirect:/";
     }
 
     @RequestMapping(value="/welcome", method = RequestMethod.GET)
