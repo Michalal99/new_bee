@@ -1,5 +1,6 @@
 package com.bee.controller;
 
+import com.bee.models.Comment;
 import com.bee.models.Project;
 import com.bee.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +58,17 @@ public class ProjectController {
         return "Project/edit";
     }
 
+    @GetMapping("/comments/{id}")
+    public String showTeamProjects(@PathVariable("id") Long id, Model model) {
+        List<Comment> comment = projectService.findProjectById(id).getComment();
+        model.addAttribute("comments", comment);
+        return "Comment/index";
+    }
+
+    @GetMapping("/comments/create/{id}")
+    public String createProjectComment(Model model) {
+        Comment comment = new Comment();
+        model.addAttribute("comment", comment);
+        return "Comment/create";
+    }
 }
