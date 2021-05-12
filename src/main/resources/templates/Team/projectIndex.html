@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Teams</title>
+    <title>Dashboard</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
@@ -37,7 +37,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
                             <span data-feather="home"></span>
-                            Teams <span class="sr-only">(current)</span>
+                            Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -76,7 +76,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Teams</h1>
+                <h1 class="h2">Projects</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary">Export</button>
@@ -84,22 +84,34 @@
                 </div>
             </div>
 
-            <div class="card text-center">
-                <div class="card-header">
-                    Team
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${#strings.capitalize(team.name)}"></h5>
-                    <p class="card-text" th:text="${#strings.capitalize(team.description)}"></p>
-                    <a href="#" class="btn btn-info">View members</a>
-                    <a th:href="@{/teams/projects/{teamId}(teamId = ${team.id})}" class="btn btn-info">View projects</a>
-                    <a href="#" class="btn btn-success">Add member</a>
-                    <a href="#" class="btn btn-success">Add project</a>
-                    <a th:href="@{/teams/edit/{teamId}(teamId = ${team.id})}" class="btn btn-warning">Edit</a>
-                    <a th:href="@{/teams/delete/{teamId}(teamId = ${team.id})}" class="btn btn-danger">Delete</a>
-                </div>
-                <div class="card-footer text-muted">
-                    TEAM ACTIONS
+            <div class="table-responsive">
+                <div class="container">
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Project ID</th>
+                                <th scope="col">Project description</th>
+                                <th scope="col">Details</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="project : ${projects}">
+                                <td th:text="${project.id}"></td>
+                                <td th:text="${project.team.id}"></td>
+                                <td th:text="${#strings.capitalize(project.description)}"></td>
+                                <td><a th:href="@{/projects/{projectId}(projectId = ${project.id})}" class="btn btn-info">Details</a></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a th:href="@{/projects/create}" class="btn btn-success">Create</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </main>

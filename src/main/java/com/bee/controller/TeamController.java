@@ -1,5 +1,6 @@
 package com.bee.controller;
 
+import com.bee.models.Project;
 import com.bee.models.Team;
 import com.bee.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/teams")
@@ -55,6 +57,13 @@ public class TeamController {
         Team team = teamService.findTeamById(id);
         model.addAttribute("team", team);
         return "Team/edit";
+    }
+
+    @GetMapping("/projects/{id}")
+    public String showTeamProjects(@PathVariable("id") Long id, Model model) {
+        List<Project> project = teamService.findTeamById(id).getProject();
+        model.addAttribute("projects", project);
+        return "Team/projectIndex";
     }
 
 }
