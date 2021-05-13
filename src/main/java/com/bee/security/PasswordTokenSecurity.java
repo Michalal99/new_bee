@@ -2,6 +2,7 @@ package com.bee.security;
 
 import com.bee.models.PasswordResetToken;
 import com.bee.repository.PasswordResetTokenRepository;
+//import com.bee.repository.RegisterConfirmationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import java.util.Calendar;
 public class PasswordTokenSecurity {
     @Autowired
     PasswordResetTokenRepository passwordTokenRepo;
+
 
     public String validatePasswordResetToken(String token) {
         final PasswordResetToken passToken = passwordTokenRepo.findByToken(token);

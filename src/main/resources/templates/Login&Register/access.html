@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Bee</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+<div class="grid-container">
+    <div class="Center">
+
+        <!--        <form name='myform' action="/api/auth/signin" method='POST'>-->
+        <form th:action="@{/admin/access}" method="post" th:object="${accessRequest}" >
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td><input type='text' name='username' id="1" th:value ="${username}"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type='text' name='email' id="2" th:value ="${email}"></td>
+                </tr>
+
+
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="roles"
+                        th:each ="role : ${allRoles}"
+                               th:text="${role.name}"
+                               th:value="${role.name}">
+<!--                               th:field="*{roles}">-->
+
+                    </div>
+
+<!--                <td><input type="radio" th:field="*{role}" id="user" value="user" name="radio"> User</td>-->
+<!--                <td><input type="radio" th:field="*{role}" id="mod" value="mod" name="radio"> Mod</td>-->
+<!--                <td><input type="radio" th:field="*{role}" id="admin" value="admin" name="radio"> Admin</td>-->
+<!--                <td><input type="radio" th:value="${role}" id="user" value="user" name="radio"> User</td>-->
+<!--                <td><input type="radio" th:value="${role}" id="mod" value="mod" name="radio"> Mod</td>-->
+<!--                <td><input type="radio" th:value="${role}" id="admin" value="admin" name="radio"> Admin</td>-->
+
+                <input name="Sign in" type="submit" value="Submit" class="btn btn-lg btn-primary btn-block"/>
+
+<!--                <tr>-->
+<!--                    <td><input  type="submit" /></td>-->
+<!--                </tr>-->
+            </table>
+        </form>
+        <!--        <a th:href="@{/api/auth/forget}"-->
+        <!--           th:text="Forget your password?">reset</a>-->
+
+
+
+    </div>
+</div>
+

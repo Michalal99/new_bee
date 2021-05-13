@@ -9,6 +9,25 @@ import java.util.Date;
 @Entity
 public class PasswordResetToken {
 
+//    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+//    @JoinColumn(nullable = false, name = "user_id")
+//    private User user;
+//
+//    public PasswordResetToken(String token, User user) {
+//        super(token);
+//        this.user = user;
+//    }
+//
+//    @Override
+//    public User getUser() {
+//        return user;
+//    }
+//    public PasswordResetToken(){
+//
+//    }
+
+
+
     private static final int EXPIRATION = 60 * 24;
 
     @Id
