@@ -89,6 +89,8 @@
                         <input th:value="${comment.id}" type="hidden" readonly="readonly" class="form-control" id="id" th:field="*{id}">
                         <input th:value="${comment.project}" type="hidden" readonly="readonly" class="form-control" id="project" th:field="*{project}">
                         <input th:value="${comment.project_id}" type="hidden" readonly="readonly" class="form-control" id="project_id" th:field="*{project_id}">
+                        <input th:value="${comment.user}" type="hidden" readonly="readonly" class="form-control" id="user" th:field="*{user}">
+                        <input th:value="${comment.user_id}" type="hidden" readonly="readonly" class="form-control" id="user_id" th:field="*{user_id}">
                         <div class="mb-3">
                             <label for="title" class="form-label">Comment title</label>
                             <input th:value="${comment.title}" type="text" class="form-control" id="title" th:field="*{title}">
