@@ -89,4 +89,12 @@ public class Comment {
     public void setProject_id(Long project_id) {
         this.project_id = project_id;
     }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
+    }
 }
