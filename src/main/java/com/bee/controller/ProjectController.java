@@ -2,6 +2,7 @@ package com.bee.controller;
 
 import com.bee.models.Comment;
 import com.bee.models.Project;
+import com.bee.models.Team;
 import com.bee.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,6 +55,7 @@ public class ProjectController {
     @GetMapping("/edit/{id}")
     public String editTeam(@PathVariable("id") Long id, Model model) {
         Project project = projectService.findProjectById(id);
+        //System.out.println("Team_id jest rowny "+project.getTeam_id());
         model.addAttribute("project", project);
         return "Project/edit";
     }

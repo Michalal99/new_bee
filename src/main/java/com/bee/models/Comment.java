@@ -14,8 +14,10 @@ public class Comment {
     @Column(nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="project_id")
+    @Column(name="project_id", insertable = false, updatable = false)
+    private Long project_id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name="project_id", nullable = false)
     private Project project;
 
     @NotBlank
@@ -25,8 +27,10 @@ public class Comment {
     @NotBlank
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
+    @Column(name="user_id", insertable = false, updatable = false)
+    private Long user_id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name="user_id", nullable = false)
     private User user;
 
     public Comment() {
@@ -76,5 +80,13 @@ public class Comment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getProject_id() {
+        return project_id;
+    }
+
+    public void setProject_id(Long project_id) {
+        this.project_id = project_id;
     }
 }
