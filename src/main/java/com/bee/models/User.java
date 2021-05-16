@@ -32,6 +32,8 @@ public class User {
     @NotBlank
     private String password;
 
+
+    private boolean authorized;
    // private String token;
 
 
@@ -43,13 +45,17 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+
+
     public User() {
+        authorized = false;
     }
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.authorized = false;
 
     }
 
@@ -93,6 +99,13 @@ public class User {
         this.roles = roles;
     }
 
+    public boolean isAuthorized() {
+        return authorized;
+    }
+
+    public void setAuthorized(boolean authorized) {
+        this.authorized = authorized;
+    }
     @Override
     public boolean equals(Object obj) {
 
