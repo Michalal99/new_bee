@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Dashboard</title>
+    <title>Teams</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
@@ -27,7 +27,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Projects</h1>
+                <h1 class="h2" th:text="${#strings.capitalize(team.name) + ' members'}"></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary">Export</button>
@@ -41,19 +41,19 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Team ID</th>
-                                <th scope="col">Project description</th>
-                                <th scope="col">Details</th>
+<!--                                <th scope="col">#</th>-->
+<!--                                <th scope="col">Project ID</th>-->
+<!--                                <th scope="col">Project description</th>-->
+<!--                                <th scope="col">Details</th>-->
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="project : ${projects}">
-                                <td th:text="${project.id}"></td>
-                                <td th:text="${project.team.id}"></td>
-                                <td th:text="${#strings.capitalize(project.description)}"></td>
-                                <td><a th:href="@{/projects/{projectId}(projectId = ${project.id})}" class="btn btn-info">Details</a></td>
-                            </tr>
+<!--                            <tr th:each="project : ${projects}">-->
+<!--                                <td th:text="${project.id}"></td>-->
+<!--                                <td th:text="${project.team.id}"></td>-->
+<!--                                <td th:text="${#strings.capitalize(project.description)}"></td>-->
+<!--                                <td><a th:href="@{/projects/{projectId}(projectId = ${project.id})}" class="btn btn-info">Details</a></td>-->
+<!--                            </tr>-->
                             <tr>
                                 <td></td>
                                 <td></td>
@@ -65,6 +65,7 @@
                     </div>
                 </div>
             </div>
+
         </main>
     </div>
 </div>

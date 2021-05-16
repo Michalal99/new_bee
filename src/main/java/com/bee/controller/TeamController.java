@@ -1,6 +1,5 @@
 package com.bee.controller;
 
-import com.bee.models.Project;
 import com.bee.models.Team;
 import com.bee.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/teams")
@@ -71,5 +69,35 @@ public class TeamController {
         Project project = new Project();
         model.addAttribute("project", project);
         return "Project/create";
+    }
+
+    //---------------members--------------//
+
+
+    @GetMapping("/{id}/members")
+    public String showMembers(@PathVariable("id") Long id, Model model) {
+        Team team = teamService.findTeamById(id);
+        model.addAttribute("team", team);
+
+        List<Team_member> team_members = teamMemberService.findAllTeamMembers();
+        model.addAttribute("members", team_members);
+
+        return "TeamMembers/index";
+    }
+
+    @GetMapping("/{id}/members/create")
+    public String addMember(@PathVariable("id") Long id, Model model) {
+        Team team = teamService.findTeamById(id);
+        Team_member team_member = new Team_member();
+        model.addAttribute("team", team);
+        model.addAttribute("team_member", team_member);
+        return "TeamMembers/create";
+    }
+
+    @PostMapping("/{id}/members")
+    public RedirectView storeMember(@ModelAttribute("team_member") Team_member team_member, Model model) {
+//        teamService.addTeam(team);
+        teamMemberService.addTeamMember(team_member);
+        return new RedirectView("/teams");
     }
 }

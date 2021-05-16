@@ -19,60 +19,11 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 font-weight-bold" href="/">Home</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/api/auth/logout">Sign out</a>
-        </li>
-    </ul>
-</nav>
+<div th:insert="Components/Navbar.html :: navbar" ></div>
 
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <span data-feather="home"></span>
-                            Teams <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">
-                            <span data-feather="file"></span>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/teams">
-                            <span data-feather="file"></span>
-                            Teams
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/projects">
-                            <span data-feather="file"></span>
-                            Projects
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file"></span>
-                            Kanban
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file"></span>
-                            Calendar
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <div th:insert="Components/Menu.html :: menu" ></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -91,9 +42,9 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${#strings.capitalize(team.name)}"></h5>
                     <p class="card-text" th:text="${#strings.capitalize(team.description)}"></p>
-                    <a href="#" class="btn btn-info">View members</a>
+                    <a th:href="@{/teams/{teamId}/members(teamId = ${team.id})}" class="btn btn-info">View members</a>
                     <a href="#" class="btn btn-info">View projects</a>
-                    <a href="#" class="btn btn-success">Add member</a>
+                    <a th:href="@{/teams/{teamId}/members/create(teamId = ${team.id})}" class="btn btn-success">Add member</a>
                     <a href="#" class="btn btn-success">Add project</a>
                     <a th:href="@{/teams/edit/{teamId}(teamId = ${team.id})}" class="btn btn-warning">Edit</a>
                     <a th:href="@{/teams/delete/{teamId}(teamId = ${team.id})}" class="btn btn-danger">Delete</a>
