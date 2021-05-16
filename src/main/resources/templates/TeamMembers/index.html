@@ -27,7 +27,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Teams</h1>
+                <h1 class="h2" th:text="${#strings.capitalize(team.name) + ' members'}"></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary">Export</button>
@@ -35,24 +35,35 @@
                 </div>
             </div>
 
-            <div class="card text-center">
-                <div class="card-header">
-                    Team
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${#strings.capitalize(team.name)}"></h5>
-                    <p class="card-text" th:text="${#strings.capitalize(team.description)}"></p>
-                    <a th:href="@{/teams/{teamId}/members(teamId = ${team.id})}" class="btn btn-info">View members</a>
-                    <a href="#" class="btn btn-info">View projects</a>
-                    <a th:href="@{/teams/{teamId}/members/create(teamId = ${team.id})}" class="btn btn-success">Add member</a>
-                    <a href="#" class="btn btn-success">Add project</a>
-                    <a th:href="@{/teams/edit/{teamId}(teamId = ${team.id})}" class="btn btn-warning">Edit</a>
-                    <a th:href="@{/teams/delete/{teamId}(teamId = ${team.id})}" class="btn btn-danger">Delete</a>
-                </div>
-                <div class="card-footer text-muted">
-                    TEAM ACTIONS
+            <div class="table-responsive">
+                <div class="container">
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Editor</th>
+                                <th scope="col">Admin</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="member : ${members}">
+                                <td th:text="${member.id}"></td>
+<!--                                <td th:text="${member.Admin}"></td>-->
+<!--                                <td th:text="${member.Editor}"></td>-->
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a th:href="@{/teams/create}" class="btn btn-success">Create</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
         </main>
     </div>
 </div>

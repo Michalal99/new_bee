@@ -1,0 +1,11 @@
+package com.bee.repository;
+
+import com.bee.models.Team;
+import com.bee.models.Team_member;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface TeamMemberRepo extends JpaRepository<Team_member, Long> {
+    Optional<Team_member> findTeam_memberById(Long id);
+}
