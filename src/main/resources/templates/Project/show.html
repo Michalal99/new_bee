@@ -90,13 +90,12 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${#strings.capitalize(project.description)}"></h5>
-                    <!--p class="card-text" th:text="${#strings.capitalize(team.description)}"></p-->
                     <a href="#" class="btn btn-info">View brainstorms</a>
-                    <a href="#" class="btn btn-info">View comments</a>
+                    <a th:href="@{/projects/comments/{projectId}(projectId = ${project.id})}" class="btn btn-info">View comments</a>
                     <a href="#" class="btn btn-info">View kanbans</a>
                     <a href="#" class="btn btn-info">View meetings</a>
                     <a href="#" class="btn btn-success">Add brainstorm</a>
-                    <a href="#" class="btn btn-success">Add comment</a>
+                    <a th:href="@{/projects/comments/create/{projectId}(projectId = ${project.id})}" class="btn btn-success">Add comments</a>
                     <a href="#" class="btn btn-success">Add kanban</a>
                     <a href="#" class="btn btn-success">Add meeting</a>
 

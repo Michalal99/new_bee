@@ -83,6 +83,8 @@
                 <div class="Center">
                     <form th:action="@{/projects}" method="post" th:object="${project}" >
                         <input th:value="${project.id}" type="hidden" readonly="readonly" class="form-control" id="id" th:field="*{id}">
+                        <input th:value="${project.team}" type="hidden", readonly="readonly" class="form-control" id="team" th:field="*{team}">
+                        <input th:value="${project.team_id}" type="hidden", readonly="readonly" class="form-control" id="team_id" th:field="*{team_id}">
                         <div class="mb-3">
                             <label for="description" class="form-label">Project description</label>
                             <input th:value="${project.description}" type="text" class="form-control" id="description" th:field="*{description}">

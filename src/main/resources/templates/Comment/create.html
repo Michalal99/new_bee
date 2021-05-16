@@ -76,7 +76,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Projects</h1>
+                <h1 class="h2">Comments</h1>
 
             </div>
             <div class="grid-container">
@@ -89,6 +89,14 @@
                         <div class="mb-3">
                             <label for="description" class="form-label">Content</label>
                             <input type="text" class="form-control" id="description" th:field="*{description}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="project.id" class="form-label">Project ID</label>
+                            <input type="number" class="form-control" id="project.id" th:field="*{project.id}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="user.id" class="form-label">User ID</label>
+                            <input type="number" class="form-control" id="user.id" th:field="*{user.id}">
                         </div>
                         <button type="submit" class="btn btn-primary">Create</button>
                     </form>
