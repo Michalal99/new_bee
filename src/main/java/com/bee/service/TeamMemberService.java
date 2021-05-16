@@ -18,8 +18,7 @@ public class TeamMemberService {
     }
 
     public List<Team_member> findAllTeamMembers() {
-//        return teamMemberRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
-        return teamMemberRepo.findAll();
+        return teamMemberRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public Team_member findTeamMemberById(Long id){
