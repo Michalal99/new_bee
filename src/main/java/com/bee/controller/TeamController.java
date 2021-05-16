@@ -1,6 +1,9 @@
 package com.bee.controller;
 
+import com.bee.models.Project;
 import com.bee.models.Team;
+import com.bee.models.Team_member;
+import com.bee.service.TeamMemberService;
 import com.bee.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import java.util.List;
 public class TeamController {
     @Autowired
     private TeamService teamService;
+    private TeamMemberService teamMemberService;
 
     @GetMapping("/create")
     public String createTeam(Model model) {
@@ -79,8 +83,9 @@ public class TeamController {
         Team team = teamService.findTeamById(id);
         model.addAttribute("team", team);
 
-        List<Team_member> team_members = teamMemberService.findAllTeamMembers();
-        model.addAttribute("members", team_members);
+//        List<Team_member> team_members = teamMemberService.findAllTeamMembers();
+        List<Team_member> team_members = teamService.findTeamById(id).getTeam_member();
+        model.addAttribute("team_members", team_members);
 
         return "TeamMembers/index";
     }

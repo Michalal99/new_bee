@@ -39,6 +39,11 @@ public class Project {
 
     }
 
+    public Project(long l, String eee) {
+        this.id = l;
+        this.description = eee;
+    }
+
     /*public Project(Team team) {
         this.team = team;
     }*/
