@@ -5,9 +5,10 @@ import com.bee.security.constraint.ValidPassword;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
-public class SignupRequest {
+public class AccessRequest {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
@@ -17,26 +18,12 @@ public class SignupRequest {
     @Email
     private String email;
 
+//
+    private List<String> roles;
 
-    private Set<String> roles;
     private String role;
 
-    @NotBlank
-//    @Size(min = 6, max = 40)
-    @ValidPassword
-    private String password;
 
-    public String getPassword_confirm() {
-        return password_confirm;
-    }
-
-    public void setPassword_confirm(String password_confirm) {
-        this.password_confirm = password_confirm;
-    }
-
-    @NotBlank
-    @Size(min = 6, max = 40)
-    private String password_confirm;
 
     public String getUsername() {
         return username;
@@ -54,19 +41,12 @@ public class SignupRequest {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<String> getRoles() {
+    public List<String> getRoles() {
         return this.roles;
     }
 
-    public void setRoles(Set<String> role) {
+    public void setRoles(List<String> role) {
         this.roles = role;
     }
 
@@ -77,5 +57,4 @@ public class SignupRequest {
     public void setRole(String role) {
         this.role = role;
     }
-
 }

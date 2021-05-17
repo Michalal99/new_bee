@@ -14,8 +14,10 @@ public class Project {
     @Column(nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="team_id", nullable = true)
+    @Column(name="team_id", insertable = false, updatable = false)
+    private Long team_id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name="team_id", nullable = false)
     private Team team;
 
     @NotBlank
@@ -34,12 +36,24 @@ public class Project {
     private Kanban kanban;
 
     public Project() {
+
     }
 
-    public Project(Long id, String description) {
+    public Project(long l, String eee) {
+        this.id = l;
+        this.description = eee;
+    }
+
+    /*public Project(Team team) {
+        this.team = team;
+    }*/
+
+    /*public Project(Long id, String description, Long team_id, Team team) {
         this.id = id;
         this.description = description;
-    }
+        this.team = team;
+        this.team_id = this.team.getId();
+    }*/
 
     public Long getId() {
         return id;
@@ -63,6 +77,7 @@ public class Project {
 
     public void setTeam(Team team) {
         this.team = team;
+        //this.team.setId(team.getId());
         //this.team.setDescription(team.getDescription());
         //this.team.setName(team.getName());
     }
@@ -99,5 +114,13 @@ public class Project {
 
     public void setKanban(Kanban kanban) {
         this.kanban = kanban;
+    }
+
+    public Long getTeam_id() {
+        return team_id;
+    }
+
+    public void setTeam_id(Long team_id) {
+        this.team_id = team_id;
     }
 }

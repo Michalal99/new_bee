@@ -27,25 +27,41 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Teams</h1>
+                <h1 class="h2" th:text="${#strings.capitalize(team.name) + ' member adding'}"></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary">Export</button>
                     </div>
                 </div>
             </div>
+            <form th:action="@{/teams/{teamId}/members(teamId = ${team.id})}" method="post" th:object="${team_member}" >
+                <div class="mb-3">
+                    <label for="id" class="form-label">ID</label>
+                    <input type="text" class="form-control" id="id" th:field="*{id}">
+                </div>
 
-            <form th:action="@{/teams}" method="post" th:object="${team}" >
                 <div class="mb-3">
-                    <label for="name" class="form-label">Team name</label>
-                    <input type="text" class="form-control" id="name" th:field="*{name}">
+                    <label for="team" class="form-label">Team ID</label>
+                    <input type="text" class="form-control" id="team" th:field="*{team}">
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label">Team description</label>
-                    <input type="text" class="form-control" id="description" th:field="*{description}">
+                    <label for="user" class="form-label">User ID</label>
+                    <input type="text" class="form-control" id="user" th:field="*{user}">
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+
+                <div class="mb-3">
+                    <label for="isEditor" class="form-label">Editor</label>
+                    <input type="number" class="form-control" id="isEditor" th:field="*{editor}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="isTeamAdmin" class="form-label">Admin</label>
+                    <input type="number" class="form-control" id="isTeamAdmin" th:field="*{teamAdmin}">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add</button>
             </form>
+
         </main>
     </div>
 </div>

@@ -19,18 +19,12 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 font-weight-bold" href="/">Home</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/api/auth/logout">Sign out</a>
-        </li>
-    </ul>
-</nav>
+<div th:insert="Components/Navbar.html :: navbar" ></div>
 
 <div class="container-fluid">
     <div class="row">
+
+        <div th:insert="Components/Menu.html :: menu" ></div>
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
@@ -82,7 +76,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Projects</h1>
+                <h1 class="h2">Comments</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary">Export</button>
@@ -128,63 +122,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Bee</title>
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/css/main.css}" rel="stylesheet">
-</head>
-<body>
-
-<div class="grid-container">
-    <div class="Center">
-        <div class="container">
-            <div class="row">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Comment title</th>
-                        <th scope="col">Content</th>
-                        <th scope="col">Details</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="comment : ${comments}">
-                        <td th:text="${comment.id}"></td>
-                        <td th:text="${#strings.capitalize(comment.title)}"></td>
-                        <td th:text="${#strings.capitalize(comment.description)}"></td>
-                        <td><a th:href="@{/comments/{commentId}(commentId = ${comment.id})}" class="btn btn-info">Details</a></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><a th:href="@{/comments/create}" class="btn btn-success">Create</a></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
-    </div>
-</div>
-
-
-</body>
-</html>
-

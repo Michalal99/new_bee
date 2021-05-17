@@ -19,15 +19,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 font-weight-bold" href="/">Home</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/api/auth/logout">Sign out</a>
-        </li>
-    </ul>
-</nav>
+<div th:insert="Components/Navbar.html :: navbar" ></div>
 
 <div class="container-fluid">
     <div class="row">
@@ -95,6 +87,14 @@
                         <div class="mb-3">
                             <label for="description" class="form-label">Content</label>
                             <input type="text" class="form-control" id="description" th:field="*{description}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="project.id" class="form-label">Project ID</label>
+                            <input type="number" class="form-control" id="project.id" th:field="*{project.id}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="user.id" class="form-label">User ID</label>
+                            <input type="number" class="form-control" id="user.id" th:field="*{user.id}">
                         </div>
                         <button type="submit" class="btn btn-primary">Create</button>
                     </form>

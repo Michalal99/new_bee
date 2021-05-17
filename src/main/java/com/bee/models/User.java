@@ -35,6 +35,8 @@ public class User {
     @NotBlank
     private String avatar_path;
 
+
+    private boolean authorized;
    // private String token;
 
 
@@ -46,13 +48,17 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+
+
     public User() {
+        authorized = false;
     }
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.authorized = false;
 
     }
 
@@ -96,6 +102,13 @@ public class User {
         this.roles = roles;
     }
 
+    public boolean isAuthorized() {
+        return authorized;
+    }
+
+    public void setAuthorized(boolean authorized) {
+        this.authorized = authorized;
+    }
     @Override
     public boolean equals(Object obj) {
 
@@ -105,14 +118,6 @@ public class User {
                 user.getPassword().compareTo(this.password);
         return x == 0;
 
-    }
-
-    public String getAvatar_path() {
-        return avatar_path;
-    }
-
-    public void setAvatar_path(String avatar_path) {
-        this.avatar_path = avatar_path;
     }
 
     //    public String getPasswordEncoded() { return passwordEncoded; }

@@ -19,18 +19,11 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 font-weight-bold" href="/">Home</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/api/auth/logout">Sign out</a>
-        </li>
-    </ul>
-</nav>
+<div th:insert="Components/Navbar.html :: navbar" ></div>
 
 <div class="container-fluid">
     <div class="row">
+        <div th:insert="Components/Menu.html :: menu" ></div>
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
@@ -89,6 +82,8 @@
                 <div class="Center">
                     <form th:action="@{/projects}" method="post" th:object="${project}" >
                         <input th:value="${project.id}" type="hidden" readonly="readonly" class="form-control" id="id" th:field="*{id}">
+                        <input th:value="${project.team}" type="hidden", readonly="readonly" class="form-control" id="team" th:field="*{team}">
+                        <input th:value="${project.team_id}" type="hidden", readonly="readonly" class="form-control" id="team_id" th:field="*{team_id}">
                         <div class="mb-3">
                             <label for="description" class="form-label">Project description</label>
                             <input th:value="${project.description}" type="text" class="form-control" id="description" th:field="*{description}">

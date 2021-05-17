@@ -22,7 +22,7 @@ public class Team {
     private List<Team_member> team_member;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="team", orphanRemoval = true)
-    private Set<Project> project;
+    private List<Project> project;
 
     public Team() {
     }
@@ -73,11 +73,11 @@ public class Team {
         this.team_member = team_member;
     }
 
-    public Set<Project> getProject() {
+    public List<Project> getProject() {
         return project;
     }
 
-    public void setProject(Set<Project> project) {
+    public void setProject(List<Project> project) {
         this.project = project;
     }
 }

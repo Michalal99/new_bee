@@ -19,18 +19,11 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 font-weight-bold" href="/">Home</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/api/auth/logout">Sign out</a>
-        </li>
-    </ul>
-</nav>
+<div th:insert="Components/Navbar.html :: navbar" ></div>
 
 <div class="container-fluid">
     <div class="row">
+        <div th:insert="Components/Menu.html :: menu" ></div>
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
@@ -96,13 +89,12 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${#strings.capitalize(project.description)}"></h5>
-                    <!--p class="card-text" th:text="${#strings.capitalize(team.description)}"></p-->
                     <a href="#" class="btn btn-info">View brainstorms</a>
-                    <a href="#" class="btn btn-info">View comments</a>
+                    <a th:href="@{/projects/comments/{projectId}(projectId = ${project.id})}" class="btn btn-info">View comments</a>
                     <a href="#" class="btn btn-info">View kanbans</a>
                     <a href="#" class="btn btn-info">View meetings</a>
                     <a href="#" class="btn btn-success">Add brainstorm</a>
-                    <a href="#" class="btn btn-success">Add comment</a>
+                    <a th:href="@{/projects/comments/create/{projectId}(projectId = ${project.id})}" class="btn btn-success">Add comments</a>
                     <a href="#" class="btn btn-success">Add kanban</a>
                     <a href="#" class="btn btn-success">Add meeting</a>
 

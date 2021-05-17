@@ -1,6 +1,9 @@
 package com.bee.controller;
 
+import com.bee.models.Project;
 import com.bee.models.Team;
+import com.bee.models.Team_member;
+import com.bee.service.TeamMemberService;
 import com.bee.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import java.util.List;
 public class TeamController {
     @Autowired
     private TeamService teamService;
+    private TeamMemberService teamMemberService;
 
     @GetMapping("/create")
     public String createTeam(Model model) {
@@ -57,4 +61,50 @@ public class TeamController {
         return "Team/edit";
     }
 
+    //-----------projects--------------//
+
+    @GetMapping("/projects/{id}")
+    public String showTeamProjects(@PathVariable("id") Long id, Model model) {
+        List<Project> project = teamService.findTeamById(id).getProject();
+        model.addAttribute("projects", project);
+        return "Project/index";
+    }
+
+    @GetMapping("/projects/create/{id}")
+    public String createTeamProject(Model model) {
+        Project project = new Project();
+        model.addAttribute("project", project);
+        return "Project/create";
+    }
+
+    //---------------members--------------//
+
+
+    @GetMapping("/{id}/members")
+    public String showMembers(@PathVariable("id") Long id, Model model) {
+        Team team = teamService.findTeamById(id);
+        model.addAttribute("team", team);
+
+//        List<Team_member> team_members = teamMemberService.findAllTeamMembers();
+        List<Team_member> team_members = teamService.findTeamById(id).getTeam_member();
+        model.addAttribute("team_members", team_members);
+
+        return "TeamMembers/index";
+    }
+
+    @GetMapping("/{id}/members/create")
+    public String addMember(@PathVariable("id") Long id, Model model) {
+        Team team = teamService.findTeamById(id);
+        Team_member team_member = new Team_member();
+        model.addAttribute("team", team);
+        model.addAttribute("team_member", team_member);
+        return "TeamMembers/create";
+    }
+
+    @PostMapping("/{id}/members")
+    public RedirectView storeMember(@PathVariable("id") Long id, @ModelAttribute("team_member") Team_member team_member, Model model) {
+//        teamService.addTeam(team);
+//        teamMemberService.addTeamMember(team_member);
+        return new RedirectView("/teams");
+    }
 }

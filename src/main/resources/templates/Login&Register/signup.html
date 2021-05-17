@@ -20,51 +20,15 @@
 
 <body class="text-center">
 
-<!--<form th:action="@{/api/auth/signup}" method="post" th:object="${signupRequest}" >
-    <table>
-        <tr>
-            <td>User:</td>
-
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td><input type='text' name='email' id="2" th:field="*{email}"></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password' id="3" th:field = "*{password}" /></td>
-        </tr>
-        <tr>
-            <td>Confirm Password:</td>
-            <td><input type='password' name='password_confirm' id="4" th:field = "*{password_confirm}"/></td>
-        </tr>
-        <tr>
-            <td><input type="radio" th:field="*{role}" id="user" value="user"> User</td>
-            <td><input type="radio" th:field="*{role}" id="mod" value="mod"> Mod</td>
-            <td><input type="radio" th:field="*{role}" id="admin" value="admin"> Admin</td>
-
-        </tr>
-        <tr>
-            <td><input  type="submit" value="submit" /></td>
-        </tr>
-    </table>
-</form>-->
-
-
-
 <form th:action="@{/api/auth/signup}" method="post" th:object="${signupRequest}" >
     <img class="mb-4" src="https://www.kindpng.com/picc/m/303-3031525_svg-icon-free-download-free-bee-icon-png.png" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Create an account</h1>
 
-
     <label for="1" class="sr-only">Username</label>
     <input type="text" id="1" class="form-control" name='username' placeholder="Username" th:field ="*{username}" required autofocus>
 
-
     <label for="2" class="sr-only">Email</label>
     <input type="text" id="2" class="form-control" name='email' placeholder="Email" th:field ="*{email}" required autofocus>
-    <!--    <td><input type='text' name='email' id="2" th:field="*{email}"></td>-->
-
 
     <label for="3" class="sr-only">Password</label>
     <input type="password" id="3" name='password' class="form-control" placeholder="Password" th:field = "*{password}" required>
@@ -74,9 +38,9 @@
 
     <br/>
 
-    <td><input type="radio" th:field="*{role}" id="user" value="user"> User</td>
-    <td><input type="radio" th:field="*{role}" id="mod" value="mod"> Mod</td>
-    <td><input type="radio" th:field="*{role}" id="admin" value="admin"> Admin</td>
+<!--    <td><input type="radio" th:field="*{role}" id="user" value="user"> User</td>-->
+<!--    <td><input type="radio" th:field="*{role}" id="mod" value="mod"> Mod</td>-->
+<!--    <td><input type="radio" th:field="*{role}" id="admin" value="admin"> Admin</td>-->
 
     <input name="Sign in" type="submit" value="Submit" class="btn btn-lg btn-primary btn-block"/>
     <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
