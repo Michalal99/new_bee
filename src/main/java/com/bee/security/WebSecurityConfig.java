@@ -1,6 +1,6 @@
 package com.bee.security;
 
-import com.bee.security.Filters.CustomAuthenticationFilter;
+
 import com.bee.security.jwt.AuthEntryPointJwt;
 import com.bee.security.jwt.AuthTokenFilter;
 import com.bee.security.jwt.CustomOAuth2UserService;
