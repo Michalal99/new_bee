@@ -9,7 +9,7 @@ The goal of the project is to create a simple team management application. Our a
 * [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
+<!--* [Room for Improvement](#room-for-improvement)-->
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
 <!-- * [License](#license) -->
@@ -46,6 +46,8 @@ To do:
 
 ## Screenshots
 ![Start page](./img/welcome.png)
+
+Start page. To log in click Login in the top right corner. To create new account click Create an account.
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
@@ -54,6 +56,16 @@ To do:
 
 
 ## Usage
+To log in click Login in the top right corner on start page. To create new account click Create an account.
+- if you already have an account, log in by entering your username and password
+- if you create a new account, enter any username, your e-mail address and password twice. Password should have:
+  - from 8 to 30 characters
+  - at least one upper case character
+  - at least one lower case character
+  - at least one digit
+  - at least one special character
+  - no whitespaces
+- if you are the first user you will get administrator rights
 <!--How does one go about using it?--!>
 <!--Provide various use cases and code examples here.-->
 
