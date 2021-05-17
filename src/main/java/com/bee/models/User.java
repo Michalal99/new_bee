@@ -32,6 +32,9 @@ public class User {
     @NotBlank
     private String password;
 
+    @NotBlank
+    private String avatar_path;
+
    // private String token;
 
 
@@ -102,6 +105,14 @@ public class User {
                 user.getPassword().compareTo(this.password);
         return x == 0;
 
+    }
+
+    public String getAvatar_path() {
+        return avatar_path;
+    }
+
+    public void setAvatar_path(String avatar_path) {
+        this.avatar_path = avatar_path;
     }
 
     //    public String getPasswordEncoded() { return passwordEncoded; }
