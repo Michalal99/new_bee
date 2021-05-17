@@ -54,7 +54,13 @@ PasswordTokenSecurity passwordTokenSecurity;
         modelAndView.setViewName("Login&Register/signup");
         return modelAndView;
     }
-
+    @GetMapping("/forget")
+    public ModelAndView passwordForget(Model model){
+       // model.addAttribute("signupRequest", new SignupRequest());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("Login&Register/forgotPassword");
+        return modelAndView;
+    }
 
     @GetMapping("/changePassword")
     public ModelAndView showChangePasswordPage(Model model, @RequestParam("token") String token, HttpSession session) {
