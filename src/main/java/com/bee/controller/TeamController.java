@@ -59,16 +59,18 @@ public class TeamController {
         return "Team/edit";
     }
 
-    @GetMapping("/projects/{id}")
+    @GetMapping("/{id}/projects")
     public String showTeamProjects(@PathVariable("id") Long id, Model model) {
         List<Project> project = teamService.findTeamById(id).getProject();
         model.addAttribute("projects", project);
         return "Project/index";
     }
 
-    @GetMapping("/projects/create/{id}")
-    public String createTeamProject(Model model) {
+    @GetMapping("/{id}/projects/create")
+    public String createTeamProject(@PathVariable("id") Long id, Model model) {
+        Team team = teamService.findTeamById(id);
         Project project = new Project();
+        project.setTeam(team);
         model.addAttribute("project", project);
         return "Project/create";
     }
