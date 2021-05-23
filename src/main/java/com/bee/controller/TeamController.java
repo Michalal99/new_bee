@@ -5,6 +5,7 @@ import com.bee.models.Team;
 import com.bee.models.Team_member;
 import com.bee.service.TeamMemberService;
 import com.bee.service.TeamService;
+import com.bee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
     private TeamMemberService teamMemberService;
+    private UserService userService;
 
     @GetMapping("/create")
     public String createTeam(Model model) {
@@ -95,6 +97,8 @@ public class TeamController {
     public String addMember(@PathVariable("id") Long id, Model model) {
         Team team = teamService.findTeamById(id);
         Team_member team_member = new Team_member();
+        team_member.setTeam(team);
+        team_member.setTeam_id(team.getId());
         model.addAttribute("team", team);
         model.addAttribute("team_member", team_member);
         return "TeamMembers/create";
@@ -102,6 +106,7 @@ public class TeamController {
 
     @PostMapping("/members")
     public RedirectView storeMember(@ModelAttribute("team_member") Team_member team_member, Model model) {
+//        team_member.setUser_id(team_member.getUser().getId());
         teamMemberService.addTeamMember(team_member);
         return new RedirectView("/teams");
     }

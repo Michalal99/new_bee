@@ -35,18 +35,12 @@
                 </div>
             </div>
             <form th:action="@{/teams/members}" method="post" th:object="${team_member}" >
-<!--                <div class="mb-3">-->
-<!--                    <label for="id" class="form-label">ID</label>-->
-<!--                    <input type="text" class="form-control" id="id" th:field="*{id}">-->
-<!--                </div>-->
+                <input th:value="${team_member.team}" type="hidden" class="form-control" readonly="readonly" id="team" th:field="*{team}">
+                <input th:value="${team_member.team_id}" type="hidden" class="form-control" readonly="readonly" id="team_id" th:field="*{team_id}">
 
                 <div class="mb-3">
-                    <label for="team.id" class="form-label">Team ID</label>
-                    <input type="text" class="form-control" id="team.id" th:field="*{team}">
-                </div>
-                <div class="mb-3">
-                    <label for="user.id" class="form-label">User ID</label>
-                    <input type="text" class="form-control" id="user.id" th:field="*{user}">
+                    <label for="user" class="form-label">User ID</label>
+                    <input type="number" class="form-control"  id="user" th:field="*{user.id}">
                 </div>
 
                 <div class="mb-3">

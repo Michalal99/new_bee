@@ -1,19 +1,21 @@
 package com.bee.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "team_members")
+@Table(name="team_members")
 public class Team_member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
+
+    @NotBlank
     private Boolean isTeamAdmin;
+
+    @NotBlank
     private Boolean isEditor;
-
-
-
 
     @Column(name="user_id", insertable = false, updatable = false)
     private Long user_id;
@@ -30,7 +32,7 @@ public class Team_member {
     public Team_member() {
     }
 
-//    public Team_member(Boolean isTeamAdmin, Boolean isEditor, User user, Team team) {
+    //    public Team_member(Boolean isTeamAdmin, Boolean isEditor, User user, Team team) {
 //        this.isTeamAdmin = isTeamAdmin;
 //        this.isEditor = isEditor;
 //        this.user = user;
