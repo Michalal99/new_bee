@@ -22,8 +22,10 @@ public class Kanban {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="kanban", orphanRemoval = true)
     private Set<Kanban_todo> kanban_todo;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="project_id")
+    @Column(name="project_id", insertable = false, updatable = false)
+    private Long project_id;
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name="project_id", nullable = false)
     private Project project;
 
     public Kanban() {
@@ -72,4 +74,14 @@ public class Kanban {
     public void setProject(Project project) {
         this.project = project;
     }
+
+    public Long getProject_id() {
+        return project_id;
+    }
+
+    public void setProject_id(Long project_id) {
+        this.project_id = project_id;
+    }
+
+
 }

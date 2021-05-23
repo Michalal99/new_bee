@@ -1,6 +1,7 @@
 package com.bee.controller;
 
 import com.bee.models.Comment;
+import com.bee.models.Kanban;
 import com.bee.models.Project;
 import com.bee.models.Team;
 import com.bee.service.ProjectService;
@@ -27,8 +28,10 @@ public class ProjectController {
 
     @PostMapping
     public RedirectView storeProject(@ModelAttribute("project") Project project, Model model) {
+        Long team_id = project.getTeam().getId();
+        String path = String.format("/teams/%d/projects", team_id);
         projectService.addProject(project);
-        return new RedirectView("/projects");
+        return new RedirectView(path);
     }
 
     @GetMapping
@@ -74,5 +77,21 @@ public class ProjectController {
         comment.setProject(project);
         model.addAttribute("comment", comment);
         return "Comment/create";
+    }
+
+    @GetMapping("/{id}/kanbans")
+    public String showProjectKanbans(@PathVariable("id") Long id, Model model) {
+        Kanban kanbans = projectService.findProjectById(id).getKanban();
+        model.addAttribute("kanbans", kanbans);
+        return "Kanban/index";
+    }
+
+    @GetMapping("/{id}/kanbans/create")
+    public String createProjectKanban(@PathVariable("id") Long id, Model model) {
+        Project project = projectService.findProjectById(id);
+        Kanban kanban = new Kanban();
+        kanban.setProject(project);
+        model.addAttribute("kanban", kanban);
+        return "Kanban/create";
     }
 }

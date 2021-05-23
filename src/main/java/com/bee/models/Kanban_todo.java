@@ -20,10 +20,10 @@ public class Kanban_todo {
     @NotBlank
     private String description;
 
-    //@NotBlank
-    //private Long kanbans_id;
+    @Column(name="kanban_id", insertable = false, updatable = false)
+    private Long kanban_id;
     @ManyToOne
-    @JoinColumn(name="kanban_id")
+    @JoinColumn(name="kanban_id", nullable = false)
     private Kanban kanban;
 
     //@NotBlank
@@ -80,5 +80,13 @@ public class Kanban_todo {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getKanban_id() {
+        return kanban_id;
+    }
+
+    public void setKanban_id(Long kanban_id) {
+        this.kanban_id = kanban_id;
     }
 }

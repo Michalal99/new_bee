@@ -25,8 +25,10 @@ public class CommentController {
 
     @PostMapping
     public RedirectView storeComment(@ModelAttribute("comment") Comment comment, Model model) {
+        Long project_id = comment.getProject().getId();
+        String path = String.format("/projects/%d/comments", project_id);
         commentService.addComment(comment);
-        return new RedirectView("/comments");
+        return new RedirectView(path);
     }
 
     @GetMapping
