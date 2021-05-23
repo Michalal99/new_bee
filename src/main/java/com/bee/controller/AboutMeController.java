@@ -8,7 +8,7 @@ package com.bee.controller;
 public class AboutMeController {
 
     @GetMapping("/aboutme")
-    public String dashboard(Model model) {
+    public String aboutme(Model model) {
         model.addAttribute("message", "Welcome to about me");
         return "aboutme";
     }
