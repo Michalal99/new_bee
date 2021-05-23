@@ -27,17 +27,39 @@
         <div th:insert="Components/Menu.html :: menu" ></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">User</h1>
+                <h1 class="h2">Account <img src="https://cdn.iconscout.com/icon/free/png-512/avatar-367-456319.png" width="50" height="50" alt="avatar"></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary">Export</button>
                     </div>
                 </div>
             </div>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td>Username</td>
+                    <td th:text="${user.username}"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td th:text="${user.email}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-danger">Delete account</button>
+                <button type="button" class="btn btn-warning">Change email</button>
+                <button type="button" class="btn btn-warning">Change username</button>
 
-            <h1 th:text="${user.username}"></h1>
+            </div>
+
+
         </main>
+
     </div>
 </div>
 

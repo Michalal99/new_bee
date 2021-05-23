@@ -4,6 +4,7 @@ import com.bee.models.Comment;
 import com.bee.models.Project;
 import com.bee.models.Team;
 import com.bee.models.Team_member;
+import com.bee.security.jwt.JwtUtils;
 import com.bee.service.TeamMemberService;
 import com.bee.service.TeamService;
 import com.bee.service.UserService;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,6 +24,8 @@ public class TeamController {
     private TeamService teamService;
     private TeamMemberService teamMemberService;
     private UserService userService;
+    @Autowired
+    JwtUtils jwtUtils;
 
     @GetMapping("/create")
     public String createTeam(Model model) {
@@ -37,7 +41,13 @@ public class TeamController {
     }
 
     @GetMapping
-    public String indexTeams(Model model) {
+    public String indexTeams(Model model, HttpSession session) {
+        var y = session.getAttribute("token");
+        var userName = jwtUtils.getUserNameFromJwtToken((String)y);
+        var user = userService.findUserByUserName(userName);
+        model.addAttribute("user", user);
+
+
         List<Team> teams = teamService.findAllTeams();
         model.addAttribute("teams", teams);
         return "Team/index";
