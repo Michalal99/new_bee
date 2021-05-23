@@ -85,10 +85,10 @@ public class AuthController {
         return "hello";
     }
 
-    @GetMapping("/forget")
-    public String passwordForget(){
-        return "forgotPassword";
-    }
+//    @GetMapping("/forget")
+//    public String passwordForget(){
+//        return "forgotPassword";
+//    }
 
     @PostMapping("/forget")
     public String sendEmailToUser(HttpServletRequest request, @RequestParam String email)

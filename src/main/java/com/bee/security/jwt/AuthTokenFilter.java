@@ -1,5 +1,6 @@
 package com.bee.security.jwt;
 
+import com.bee.repository.UserRepository;
 import com.bee.security.services.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,9 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private UserRepository userRepo;
+
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
     @Override
@@ -34,15 +38,25 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
             String jwt = (String)request.getSession().getAttribute("token");
 
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+            if (jwt != null && jwtUtils.validateJwtToken(jwt) ) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+               var user = userRepo.findByUsername(jwtUtils.getUserNameFromJwtToken(jwt)).get();
+//                if(!user.isAuthorized())
+//                    throw new ServletException();
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
                         userDetails.getAuthorities());
+
+
+               if(!user.isAuthorized())
+                authentication.setAuthenticated(false);
+
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
             }
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e);
