@@ -11,11 +11,9 @@ public class Team_member {
     @Column(nullable = false)
     private Long id;
 
-//    @NotBlank
-//    private Boolean isTeamAdmin;
-//
-//    @NotBlank
-//    private Boolean isEditor;
+    private Boolean isTeamAdmin;
+    
+    private Boolean isEditor;
 
     @Column(name="user_id", insertable = false, updatable = false)
     private Long user_id;
@@ -43,13 +41,13 @@ public class Team_member {
         return id;
     }
 
-//    public Boolean getTeamAdmin() {
-//        return isTeamAdmin;
-//    }
-//
-//    public Boolean getEditor() {
-//        return isEditor;
-//    }
+    public Boolean getTeamAdmin() {
+        return isTeamAdmin;
+    }
+
+    public Boolean getEditor() {
+        return isEditor;
+    }
 
     public User getUser() {
         return user;
@@ -63,13 +61,13 @@ public class Team_member {
         this.id = id;
     }
 
-//    public void setTeamAdmin(Boolean teamAdmin) {
-//        isTeamAdmin = teamAdmin;
-//    }
-//
-//    public void setEditor(Boolean editor) {
-//        isEditor = editor;
-//    }
+    public void setTeamAdmin(Boolean teamAdmin) {
+        isTeamAdmin = teamAdmin;
+    }
+
+    public void setEditor(Boolean editor) {
+        isEditor = editor;
+    }
 
     public void setUser(User user) {
         this.user = user;

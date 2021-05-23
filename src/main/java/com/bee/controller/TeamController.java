@@ -114,14 +114,9 @@ public class TeamController {
     @GetMapping("/{id}/members/create")
     public String addMember(@PathVariable("id") Long id, Model model) {
         Team_member team_member = new Team_member();
+        team_member.setTeam(teamService.findTeamById(id));
         model.addAttribute("team_member", team_member);
         return "TeamMembers/create";
-    }
-
-    @PostMapping("/members")
-    public RedirectView storeMember(@ModelAttribute("team_member") Team_member team_member, Model model) {
-        teamMemberService.addTeamMember(team_member);
-        return new RedirectView("/teams");
     }
 
 }
