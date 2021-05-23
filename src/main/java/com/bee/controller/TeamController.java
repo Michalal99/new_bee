@@ -1,5 +1,6 @@
 package com.bee.controller;
 
+import com.bee.models.Comment;
 import com.bee.models.Project;
 import com.bee.models.Team;
 import com.bee.models.Team_member;
@@ -93,21 +94,34 @@ public class TeamController {
         return "TeamMembers/index";
     }
 
+//    @GetMapping("/{id}/members/create")
+//    public String addMember(@PathVariable("id") Long id, Model model) {
+//        Team team = teamService.findTeamById(id);
+//        Team_member team_member = new Team_member();
+//        team_member.setTeam(team);
+//        team_member.setTeam_id(team.getId());
+//        model.addAttribute("team", team);
+//        model.addAttribute("team_member", team_member);
+//        return "TeamMembers/create";
+//    }
+//
+//    @PostMapping("/members")
+//    public RedirectView storeMember(@ModelAttribute("team_member") Team_member team_member, Model model) {
+//        teamMemberService.addTeamMember(team_member);
+//        return new RedirectView("/teams");
+//    }
+
     @GetMapping("/{id}/members/create")
     public String addMember(@PathVariable("id") Long id, Model model) {
-        Team team = teamService.findTeamById(id);
         Team_member team_member = new Team_member();
-        team_member.setTeam(team);
-        team_member.setTeam_id(team.getId());
-        model.addAttribute("team", team);
         model.addAttribute("team_member", team_member);
         return "TeamMembers/create";
     }
 
     @PostMapping("/members")
     public RedirectView storeMember(@ModelAttribute("team_member") Team_member team_member, Model model) {
-//        team_member.setUser_id(team_member.getUser().getId());
         teamMemberService.addTeamMember(team_member);
         return new RedirectView("/teams");
     }
+
 }

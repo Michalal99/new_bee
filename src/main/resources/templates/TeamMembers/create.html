@@ -1,3 +1,69 @@
+<!--<!doctype html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--    <meta name="description" content="">-->
+<!--    <meta name="author" content="">-->
+<!--    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">-->
+
+<!--    <title>Teams</title>-->
+
+<!--    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">-->
+
+<!--    &lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
+<!--    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">-->
+
+<!--    &lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+<!--    <link th:href="@{/css/dashboard.css}" rel="stylesheet">-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div th:insert="Components/Navbar.html :: navbar" ></div>-->
+
+<!--<div class="container-fluid">-->
+<!--    <div class="row">-->
+<!--        <div th:insert="Components/Menu.html :: menu" ></div>-->
+
+<!--        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">-->
+<!--            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">-->
+<!--                <h1 class="h2" th:text="${#strings.capitalize(team.name) + ' member adding'}"></h1>-->
+<!--                <div class="btn-toolbar mb-2 mb-md-0">-->
+<!--                    <div class="btn-group mr-2">-->
+<!--                        <button class="btn btn-sm btn-outline-secondary">Export</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <form th:action="@{/teams/members}" method="post" th:object="${team_member}" >-->
+<!--                <input th:value="${team_member.team}" type="hidden" class="form-control" readonly="readonly" id="team" th:field="*{team}">-->
+<!--                <input th:value="${team_member.team_id}" type="hidden" class="form-control" readonly="readonly" id="team_id" th:field="*{team_id}">-->
+
+<!--                <div class="mb-3">-->
+<!--                    <label for="user" class="form-label">User ID</label>-->
+<!--                    <input type="number" class="form-control"  id="user" th:field="*{user.id}">-->
+<!--                </div>-->
+
+<!--&lt;!&ndash;                <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label for="isEditor" class="form-label">Editor</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="number" class="form-control" id="isEditor" th:field="*{editor}">&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label for="isTeamAdmin" class="form-label">Admin</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="number" class="form-control" id="isTeamAdmin" th:field="*{teamAdmin}">&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+
+<!--                <button type="submit" class="btn btn-primary">Add</button>-->
+<!--            </form>-->
+
+<!--        </main>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,7 +73,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Teams</title>
+    <title>Dashboard</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
@@ -23,38 +89,29 @@
 
 <div class="container-fluid">
     <div class="row">
+
         <div th:insert="Components/Menu.html :: menu" ></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2" th:text="${#strings.capitalize(team.name) + ' member adding'}"></h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <button class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
+                <h1 class="h2">Members</h1>
+
+            </div>
+            <div class="grid-container">
+                <div class="Center">
+                    <form th:action="@{/members}" method="post" th:object="${team_member}" >
+                        <div class="mb-3">
+                            <label for="team.id" class="form-label">Team ID</label>
+                            <input type="number" class="form-control" id="team.id" th:field="*{team.id}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="user.id" class="form-label">User ID</label>
+                            <input type="number" class="form-control" id="user.id" th:field="*{user.id}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
                 </div>
             </div>
-            <form th:action="@{/teams/members}" method="post" th:object="${team_member}" >
-                <input th:value="${team_member.team}" type="hidden" class="form-control" readonly="readonly" id="team" th:field="*{team}">
-                <input th:value="${team_member.team_id}" type="hidden" class="form-control" readonly="readonly" id="team_id" th:field="*{team_id}">
-
-                <div class="mb-3">
-                    <label for="user" class="form-label">User ID</label>
-                    <input type="number" class="form-control"  id="user" th:field="*{user.id}">
-                </div>
-
-                <div class="mb-3">
-                    <label for="isEditor" class="form-label">Editor</label>
-                    <input type="number" class="form-control" id="isEditor" th:field="*{editor}">
-                </div>
-
-                <div class="mb-3">
-                    <label for="isTeamAdmin" class="form-label">Admin</label>
-                    <input type="number" class="form-control" id="isTeamAdmin" th:field="*{teamAdmin}">
-                </div>
-
-                <button type="submit" class="btn btn-primary">Add</button>
-            </form>
 
         </main>
     </div>
@@ -62,3 +119,4 @@
 
 </body>
 </html>
+
