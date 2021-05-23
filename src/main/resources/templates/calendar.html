@@ -88,144 +88,92 @@
 
 
 
+            <style type="text/css">
+    p, body, td { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
+    body { padding: 0px; margin: 0px; background-color: #ffffff; }
+    a { color: #1155a3; }
+    .space { margin: 10px 0px 10px 0px; }
+    .header { background: #003267; background: linear-gradient(to right, #011329 0%,#00639e 44%,#011329 100%); padding:20px 10px; color: white; box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75); }
+    .header a { color: white; }
+    .header h1 a { text-decoration: none; }
+    .header h1 { padding: 0px; margin: 0px; }
+    .main { padding: 10px; margin-top: 10px; }
+    .generated { color: #999; }
+    .generated a { color: #999; }
+  </style>
 
+            <!-- DayPilot library -->
+            <script src="js/daypilot/daypilot-all.min.js"></script>
+            </head>
+            <>
 
-        <div class="main" style="display: flex;">
-            <div style="margin-right: 10px;">
-                <div id="nav"></div>
-            </div>
-            <div style="flex-grow: 1">
+            <div class="main">
                 <div id="dp"></div>
             </div>
-        </div>
 
-        <!-- DayPilot library -->
-        <script src="js/daypilot/daypilot-all.min.js"></script>
-
-        <script>
-
-    var nav = new DayPilot.Navigator("nav");
-    nav.showMonths = 3;
-    nav.skipMonths = 3;
-    nav.selectMode = "week";
-    nav.onTimeRangeSelected = function(args) {
-        dp.startDate = args.day;
-        dp.update();
-        dp.events.load("/calendar/events");
-    };
-    nav.init();
+            <script>
 
 
-    var dp = new DayPilot.Calendar("dp");
-    dp.viewType = "Week";
-    dp.onTimeRangeSelected = function (args) {
-        DayPilot.Modal.prompt("Create a new event:", "Event").then(function (modal) {
-            var dp = args.control;
-            dp.clearSelection();
-            if (!modal.result) {
-                return;
-            }
-            var params = {
-                start: args.start.toString(),
-                end: args.end.toString(),
-                text: modal.result
-            };
-            DayPilot.Http.ajax({
-                url: '/calendar/events/create',
-                data: params,
-                success: function (ajax) {
-                    var data = ajax.data;
-                    dp.events.add(new DayPilot.Event(data));
-                    dp.message("Event created");
-                }
-            });
-        });
-    };
-    dp.onEventMove = function (args) {
-        var params = {
-            id: args.e.id(),
-            start: args.newStart.toString(),
-            end: args.newEnd.toString()
-        };
-        DayPilot.Http.ajax({
-            url: '/calendar/events/move',
-            data: params,
-            success: function (ajax) {
-                dp.message("Event moved");
-            }
-        });
-    };
-    dp.onEventResize = function (args) {
-        var params = {
-            id: args.e.id(),
-            start: args.newStart.toString(),
-            end: args.newEnd.toString()
-        };
-        DayPilot.Http.ajax({
-            url: '/calendar/events/move',
-            data: params,
-            success: function (ajax) {
-                dp.message("Event resized");
-            }
-        });
-    };
-    dp.onBeforeEventRender = function(args) {
-        args.data.barColor = args.data.color;
-        args.data.areas = [
-            { top: 2, right: 2, icon: "icon-triangle-down", visibility: "Visible", action: "ContextMenu", style: "font-size: 12px; background-color: #f9f9f9; border: 1px solid #ccc; padding: 2px 2px 0px 2px; cursor:pointer;"}
-        ];
-    };
-    dp.contextMenu = new DayPilot.Menu({
-        items: [
-            {
-                text: "Blue",
-                icon: "icon icon-blue",
-                color: "#1066a8",
-                onClick: function(args) { updateColor(args.source, args.item.color); }
-            },
-            {
-                text: "Green",
-                icon: "icon icon-green",
-                color: "#6aa84f",
-                onClick: function(args) { updateColor(args.source, args.item.color); }
-            },
-            {
-                text: "Yellow",
-                icon: "icon icon-yellow",
-                color: "#f1c232",
-                onClick: function(args) { updateColor(args.source, args.item.color); }
-            },
-            {
-                text: "Red",
-                icon: "icon icon-red",
-                color: "#cc0000",
-                onClick: function(args) { updateColor(args.source, args.item.color); }
-            },
 
-        ]
-    });
-    dp.init();
-
-    dp.events.load("/calendar/events");
+  var dp = new DayPilot.Scheduler("dp", {
+    timeHeaders: [{"groupBy":"Month"},{"groupBy":"Day","format":"d"},{"groupBy": "Hour"}],
+    scale: "Hour",
+    days: DayPilot.Date.today().daysInYear(),
+    startDate: DayPilot.Date.today().firstDayOfMonth(),
+    timeRangeSelectedHandling: "Enabled",
+    onTimeRangeSelected: async (args) => {
+      const dp = args.control;
+      const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");
+      dp.clearSelection();
+      if (modal.canceled) { return; }
+      dp.events.add({
+        start: args.start,
+        end: args.end,
+        id: DayPilot.guid(),
+        resource: args.resource,
+        text: modal.result
+      });
+    },
+    eventMoveHandling: "Update",
+    onEventMoved: (args) => {
+      args.control.message("Event moved: " + args.e.text());
+    },
+    eventResizeHandling: "Update",
+    onEventResized: (args) => {
+      args.control.message("Event resized: " + args.e.text());
+    },
+    eventDeleteHandling: "Update",
+    onEventDeleted: (args) => {
+      args.control.message("Event deleted: " + args.e.text());
+    },
+    eventClickHandling: "Disabled",
+    eventHoverHandling: "Bubble",
+    bubble: new DayPilot.Bubble({
+      onLoad: (args) => {
+        // if event object doesn't specify "bubbleHtml" property
+        // this onLoad handler will be called to provide the bubble HTML
+        args.html = "Event details";
+      }
+    }),
+    treeEnabled: true,
+    rowHeaderHideIconEnabled: true,
+  });
+  dp.resources = [
+    {name: "Resource 1", id: "R1"},
+    {name: "Resource 2", id: "R2"},
+    {name: "Resource 3", id: "R3"},
+    {name: "Resource 4", id: "R4"},
+    {name: "Resource 5", id: "R5"},
+    {name: "Resource 6", id: "R6"},
+    {name: "Resource 7", id: "R7"},
+    {name: "Resource 8", id: "R8"},
+    {name: "Resource 9", id: "R9"},
+  ];
+  dp.events.list = [];
+  dp.init();
+            </script>
 
 
-    function updateColor(e, color) {
-        var params = {
-            id: e.id(),
-            color: color
-        };
-        DayPilot.Http.ajax({
-            url: '/calendar/events/setColor',
-            data: params,
-            success: function (ajax) {
-                e.data.color = color;
-                dp.events.update(e);
-                dp.message("Color updated");
-            }
-        });
-    }
-
-</script>
 
 
 
