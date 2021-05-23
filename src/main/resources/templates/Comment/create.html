@@ -82,6 +82,8 @@
             <div class="grid-container">
                 <div class="Center">
                     <form th:action="@{/comments}" method="post" th:object="${comment}" >
+                        <input th:value="${comment.project}" type="hidden" readonly="readonly" class="form-control" id="project" th:field="*{project}">
+                        <input th:value="${comment.project_id}" type="hidden" readonly="readonly" class="form-control" id="project_id" th:field="*{project_id}">
                         <div class="mb-3">
                             <label for="title" class="form-label">Comment title</label>
                             <input type="text" class="form-control" id="title" th:field="*{title}">
@@ -89,10 +91,6 @@
                         <div class="mb-3">
                             <label for="description" class="form-label">Content</label>
                             <input type="text" class="form-control" id="description" th:field="*{description}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="project.id" class="form-label">Project ID</label>
-                            <input type="number" class="form-control" id="project.id" th:field="*{project.id}">
                         </div>
                         <div class="mb-3">
                             <label for="user.id" class="form-label">User ID</label>

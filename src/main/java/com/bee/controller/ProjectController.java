@@ -60,16 +60,18 @@ public class ProjectController {
         return "Project/edit";
     }
 
-    @GetMapping("/comments/{id}")
+    @GetMapping("/{id}/comments")
     public String showTeamProjects(@PathVariable("id") Long id, Model model) {
         List<Comment> comment = projectService.findProjectById(id).getComment();
         model.addAttribute("comments", comment);
         return "Comment/index";
     }
 
-    @GetMapping("/comments/create/{id}")
-    public String createProjectComment(Model model) {
+    @GetMapping("/{id}/comments/create")
+    public String createProjectComment(@PathVariable("id") Long id, Model model) {
+        Project project = projectService.findProjectById(id);
         Comment comment = new Comment();
+        comment.setProject(project);
         model.addAttribute("comment", comment);
         return "Comment/create";
     }
