@@ -88,8 +88,8 @@
                         <div class="card-body">
                             <h5 class="card-title" th:text="${#strings.capitalize(comment.title)}"></h5>
                             <p class="card-text" th:text="${#strings.capitalize(comment.description)}"></p>
-                            <a th:href="@{/comments/edit/{commentId}(commentId = ${comment.id})}" class="btn btn-warning">Edit</a>
-                            <a th:href="@{/comments/delete/{commentId}(commentId = ${comment.id})}" class="btn btn-danger">Delete</a>
+                            <a th:href="@{/comments/{commentId}/edit(commentId = ${comment.id})}" class="btn btn-warning">Edit</a>
+                            <a th:href="@{/comments/{commentId}/delete(commentId = ${comment.id})}" class="btn btn-danger">Delete</a>
                         </div>
                         <div class="card-footer text-muted">
                             Comment

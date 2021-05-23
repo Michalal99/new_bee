@@ -45,14 +45,14 @@ public class ProjectController {
         return "Project/show";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/{id}/delete")
     public RedirectView deleteTeam(@PathVariable("id") Long id) {
         Project oldProject = projectService.findProjectById(id);
         projectService.deleteProject(oldProject);
         return new RedirectView("/projects");
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String editTeam(@PathVariable("id") Long id, Model model) {
         Project project = projectService.findProjectById(id);
         //System.out.println("Team_id jest rowny "+project.getTeam_id());

@@ -45,14 +45,14 @@ public class TeamController {
         return "Team/show";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/{id}/delete")
     public RedirectView deleteTeam(@PathVariable("id") Long id) {
         Team oldTeam = teamService.findTeamById(id);
         teamService.deleteTeam(oldTeam);
         return new RedirectView("/teams");
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String editTeam(@PathVariable("id") Long id, Model model) {
         Team team = teamService.findTeamById(id);
         model.addAttribute("team", team);
