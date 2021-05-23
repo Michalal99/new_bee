@@ -85,7 +85,6 @@ public class TeamController {
         Team team = teamService.findTeamById(id);
         model.addAttribute("team", team);
 
-//        List<Team_member> team_members = teamMemberService.findAllTeamMembers();
         List<Team_member> team_members = teamService.findTeamById(id).getTeam_member();
         model.addAttribute("team_members", team_members);
 
@@ -101,10 +100,9 @@ public class TeamController {
         return "TeamMembers/create";
     }
 
-    @PostMapping("/{id}/members")
-    public RedirectView storeMember(@PathVariable("id") Long id, @ModelAttribute("team_member") Team_member team_member, Model model) {
-//        teamService.addTeam(team);
-//        teamMemberService.addTeamMember(team_member);
+    @PostMapping("/members")
+    public RedirectView storeMember(@ModelAttribute("team_member") Team_member team_member, Model model) {
+        teamMemberService.addTeamMember(team_member);
         return new RedirectView("/teams");
     }
 }

@@ -34,19 +34,19 @@
                     </div>
                 </div>
             </div>
-            <form th:action="@{/teams/{teamId}/members(teamId = ${team.id})}" method="post" th:object="${team_member}" >
-                <div class="mb-3">
-                    <label for="id" class="form-label">ID</label>
-                    <input type="text" class="form-control" id="id" th:field="*{id}">
-                </div>
+            <form th:action="@{/teams/members}" method="post" th:object="${team_member}" >
+<!--                <div class="mb-3">-->
+<!--                    <label for="id" class="form-label">ID</label>-->
+<!--                    <input type="text" class="form-control" id="id" th:field="*{id}">-->
+<!--                </div>-->
 
                 <div class="mb-3">
-                    <label for="team" class="form-label">Team ID</label>
-                    <input type="text" class="form-control" id="team" th:field="*{team}">
+                    <label for="team.id" class="form-label">Team ID</label>
+                    <input type="text" class="form-control" id="team.id" th:field="*{team}">
                 </div>
                 <div class="mb-3">
-                    <label for="user" class="form-label">User ID</label>
-                    <input type="text" class="form-control" id="user" th:field="*{user}">
+                    <label for="user.id" class="form-label">User ID</label>
+                    <input type="text" class="form-control" id="user.id" th:field="*{user}">
                 </div>
 
                 <div class="mb-3">
