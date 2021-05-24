@@ -43,11 +43,11 @@
                     <h5 class="card-title" th:text="${#strings.capitalize(team.name)}"></h5>
                     <p class="card-text" th:text="${#strings.capitalize(team.description)}"></p>
                     <a th:href="@{/teams/{teamId}/members(teamId = ${team.id})}" class="btn btn-info">View members</a>
-                    <a th:href="@{/teams/projects/{teamId}(teamId = ${team.id})}" class="btn btn-info">View projects</a>
+                    <a th:href="@{/teams/{teamId}/projects(teamId = ${team.id})}" class="btn btn-info">View projects</a>
                     <a th:href="@{/teams/{teamId}/members/create(teamId = ${team.id})}" class="btn btn-success">Add member</a>
-                    <a th:href="@{/teams/projects/create/{teamId}(teamId = ${team.id})}" class="btn btn-success">Add project</a>
-                    <a th:href="@{/teams/edit/{teamId}(teamId = ${team.id})}" class="btn btn-warning">Edit</a>
-                    <a th:href="@{/teams/delete/{teamId}(teamId = ${team.id})}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{/teams/{teamId}/projects/create(teamId = ${team.id})}" class="btn btn-success">Add project</a>
+                    <a th:href="@{/teams/{teamId}/edit(teamId = ${team.id})}" class="btn btn-warning">Edit</a>
+                    <a th:href="@{/teams/{teamId}/delete(teamId = ${team.id})}" class="btn btn-danger">Delete</a>
                 </div>
                 <div class="card-footer text-muted">
                     TEAM ACTIONS
