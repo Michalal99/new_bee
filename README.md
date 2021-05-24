@@ -37,11 +37,12 @@ List the ready features here:
 - creating projects for teams
 - adding comments to projects
 - editing and deleting teams, projects and comments
+- calendar with the ability to add events
 
 To do:
 - create kanban tables
-- create calendar
 - create a brainstorming tool
+- tests
 
 
 ## Screenshots
@@ -66,12 +67,32 @@ Type the commands:
 
 `cd Intellij_Docker/root-intellij`
 
+`./install.sh`
+
 `./start.sh`
 
 In the Intellij start window click Customize->All settings->Apperance & Behavior->System Settings->Passwords->In keePass->OK.
 Then click Projects->Get from VCS->Git Hub->Use token... Now in your github account go to Settings->Developer settings->Personal access tokens->Generate a personal access tokens.
 Now select repo, workflow, gist and read:org. In note write Intellij_token, click Generate token and paste your token to Intellij and click Log in.
-Select IncorporateUS/bee->Clone->Trust project
+Select IncorporateUS/bee->Clone->Trust project.
+
+OK, let's connect to the database. In the upper right corner click DB Browser and new connection (green '+') and choose PostgreSQL. Type in the fields:
+
+Host: `10.0.0.3`
+
+User: `postgres`
+
+Password: `test123`
+
+Click OK. Now we should be connected to the database.
+
+In the upper left corner, expand the tab Project if neccesary, then expand bee->src->main->java->com.bee and double click StartUpApplication. Now in the top menu click Run->Run 'StartUpApplication'. After a few seconds the application should start.
+To see a working application, start the browser and search for the address:
+
+`http://localhost:8080`
+
+The page looks like in [Screenshots](#screenshots)
+
 
 ## Usage
 To log in click Login in the top right corner on start page. To create new account click Create an account.
