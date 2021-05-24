@@ -53,7 +53,11 @@ Start page. To log in click Login in the top right corner. To create new account
 
 ## Setup
 <!-- To run our program, clone this repository to your Linux system. Then write a commands -->
-Generate public SSH key and add to your github (in your github account go to settings->SSH and GPG keys->New SSH key->paste your SSH key and click add SSH key).
+Generate public SSH key and add to your github:
+
+`ssh-keygen`
+
+In your github account go to settings->SSH and GPG keys->New SSH key->paste your SSH key and click add SSH key.
 Now go to IncorporateUS/Intellij_Docker repository to clone it and paste to your terminal:
 
 `git clone git@github.com:IncorporateUS/Intellij_Docker.git`
@@ -64,7 +68,10 @@ Type the commands:
 
 `./start.sh`
 
-
+In the Intellij start window click Customize->All settings->Apperance & Behavior->System Settings->Passwords->In keePass->OK.
+Then click Projects->Get from VCS->Git Hub->Use token... Now in your github account go to Settings->Developer settings->Personal access tokens->Generate a personal access tokens.
+Now select repo, workflow, gist and read:org. In note write Intellij_token, click Generate token and paste your token to Intellij and click Log in.
+Select IncorporateUS/bee->Clone->Trust project
 
 ## Usage
 To log in click Login in the top right corner on start page. To create new account click Create an account.
