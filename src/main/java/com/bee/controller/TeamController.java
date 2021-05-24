@@ -41,8 +41,23 @@ public class TeamController {
     }
 
     @PostMapping
-    public RedirectView storeTeam(@ModelAttribute("team") Team team, Model model) {
+    public RedirectView storeTeam(@ModelAttribute("team") Team team, Model model, HttpSession session) {
         teamService.addTeam(team);
+
+
+        var y = session.getAttribute("token");
+        var userName = jwtUtils.getUserNameFromJwtToken((String)y);
+        var user = userService.findUserByUserName(userName);
+        model.addAttribute("user", user);
+        var team_member = new Team_member();
+        team_member.setTeam(team);
+        team_member.setUser(user);
+        team_member.setEditor(true);
+        team_member.setTeamAdmin(true);
+
+        teamMemberService.addTeamMember(team_member);
+
+
         return new RedirectView("/teams");
     }
 

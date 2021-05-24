@@ -1,24 +1,16 @@
 package com.bee.controller;
 
-import com.bee.models.ERole;
 import com.bee.models.Role;
 import com.bee.payload.request.AccessRequest;
-import com.bee.payload.request.LoginRequest;
-import com.bee.payload.request.SignupRequest;
 import com.bee.repository.RoleRepository;
 import com.bee.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,7 +42,13 @@ public class AdminBoardController {
         return mav;
        // return "Login&Register/signup";
        // return "Login&Register/access";
-    }
+
+
+
+
+
+
+ }
 
     @PostMapping("/access")
     @PreAuthorize("@accessService.hasAccess(#session) and hasRole('ADMIN')")
@@ -70,13 +68,6 @@ public class AdminBoardController {
         }
         user.setRoles(roles);
         userRepo.save(user);
-
-
-
-
-
-
-
 
 
 //        Set<Role> roles = accessRequest.getRoles().stream().collect(Collectors.toSet());
