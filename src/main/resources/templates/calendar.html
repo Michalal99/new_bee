@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Teams</title>
+    <title>Calendar</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
@@ -23,6 +23,7 @@
 
 <div class="container-fluid">
     <div class="row">
+
         <div th:insert="Components/Menu.html :: menu" ></div>
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
@@ -30,7 +31,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
                             <span data-feather="home"></span>
-                            Teams <span class="sr-only">(current)</span>
+                            Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -76,7 +77,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Projects</h1>
+                <h1 class="h2">Calendar</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary">Export</button>
@@ -84,29 +85,101 @@
                 </div>
             </div>
 
-            <div class="card text-center">
-                <div class="card-header">
-                    Project
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${#strings.capitalize(project.description)}"></h5>
-                    <a href="#" class="btn btn-info">View brainstorms</a>
-                    <a th:href="@{/projects/{projectId}/comments(projectId = ${project.id})}" class="btn btn-info">View comments</a>
-                    <a th:href="@{/projects/{projectId}/kanbans(projectId = ${project.id})}" class="btn btn-info"}>View kanbans</a>
-                    <a href="#" class="btn btn-info">View meetings</a>
-                    <a href="#" class="btn btn-success">Add brainstorm</a>
-                    <a th:href="@{/projects/{projectId}/comments/create(projectId = ${project.id})}" class="btn btn-success">Add comments</a>
-                    <a th:href="@{/projects/{projectId}/kanbans/create(projectId = ${project.id})}" class="btn btn-success">Add kanban</a>
-                    <a href="#" class="btn btn-success">Add meeting</a>
 
-                    <td><a th:href="@{/projects/create}" class="btn btn-success">Create</a></td>
-                    <a th:href="@{/projects/{projectId}/edit(projectId = ${project.id})}" class="btn btn-warning">Edit</a>
-                    <a th:href="@{/projects/{projectId}/delete(projectId = ${project.id})}" class="btn btn-danger">Delete</a>
-                </div>
-                <div class="card-footer text-muted">
-                    PROJECT ACTIONS
-                </div>
+
+
+            <style type="text/css">
+    p, body, td { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
+    body { padding: 0px; margin: 0px; background-color: #ffffff; }
+    a { color: #1155a3; }
+    .space { margin: 10px 0px 10px 0px; }
+    .header { background: #003267; background: linear-gradient(to right, #011329 0%,#00639e 44%,#011329 100%); padding:20px 10px; color: white; box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75); }
+    .header a { color: white; }
+    .header h1 a { text-decoration: none; }
+    .header h1 { padding: 0px; margin: 0px; }
+    .main { padding: 10px; margin-top: 10px; }
+    .generated { color: #999; }
+    .generated a { color: #999; }
+  </style>
+
+            <!-- DayPilot library -->
+            <script src="js/daypilot/daypilot-all.min.js"></script>
+            </head>
+            <>
+
+            <div class="main">
+                <div id="dp"></div>
             </div>
+
+            <script>
+
+
+
+  var dp = new DayPilot.Scheduler("dp", {
+    timeHeaders: [{"groupBy":"Month"},{"groupBy":"Day","format":"d"},{"groupBy": "Hour"}],
+    scale: "Hour",
+    days: DayPilot.Date.today().daysInYear(),
+    startDate: DayPilot.Date.today().firstDayOfMonth(),
+    timeRangeSelectedHandling: "Enabled",
+    onTimeRangeSelected: async (args) => {
+      const dp = args.control;
+      const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");
+      dp.clearSelection();
+      if (modal.canceled) { return; }
+      dp.events.add({
+        start: args.start,
+        end: args.end,
+        id: DayPilot.guid(),
+        resource: args.resource,
+        text: modal.result
+      });
+    },
+    eventMoveHandling: "Update",
+    onEventMoved: (args) => {
+      args.control.message("Event moved: " + args.e.text());
+    },
+    eventResizeHandling: "Update",
+    onEventResized: (args) => {
+      args.control.message("Event resized: " + args.e.text());
+    },
+    eventDeleteHandling: "Update",
+    onEventDeleted: (args) => {
+      args.control.message("Event deleted: " + args.e.text());
+    },
+    eventClickHandling: "Disabled",
+    eventHoverHandling: "Bubble",
+    bubble: new DayPilot.Bubble({
+      onLoad: (args) => {
+        // if event object doesn't specify "bubbleHtml" property
+        // this onLoad handler will be called to provide the bubble HTML
+        args.html = "Event details";
+      }
+    }),
+    treeEnabled: true,
+    rowHeaderHideIconEnabled: true,
+  });
+  dp.resources = [
+    {name: "Resource 1", id: "R1"},
+    {name: "Resource 2", id: "R2"},
+    {name: "Resource 3", id: "R3"},
+    {name: "Resource 4", id: "R4"},
+    {name: "Resource 5", id: "R5"},
+    {name: "Resource 6", id: "R6"},
+    {name: "Resource 7", id: "R7"},
+    {name: "Resource 8", id: "R8"},
+    {name: "Resource 9", id: "R9"},
+  ];
+  dp.events.list = [];
+  dp.init();
+            </script>
+
+
+
+
+
+
+
+
         </main>
     </div>
 </div>
