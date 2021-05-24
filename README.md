@@ -53,6 +53,17 @@ Start page. To log in click Login in the top right corner. To create new account
 
 ## Setup
 <!-- To run our program, clone this repository to your Linux system. Then write a commands -->
+Generate public SSH key and add to your github (in your github account go to settings->SSH and GPG keys->New SSH key->paste your SSH key and click add SSH key).
+Now go to IncorporateUS/Intellij_Docker repository to clone it and paste to your terminal:
+
+`git clone git@github.com:IncorporateUS/Intellij_Docker.git`
+
+Type the commands:
+
+`cd Intellij_Docker/root-intellij`
+
+`./start.sh`
+
 
 
 ## Usage
