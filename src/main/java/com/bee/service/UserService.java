@@ -28,6 +28,10 @@ public class UserService {
     @Autowired
     private RegisterConfirmationTokenRepository registerTokenRepository;
 
+    public User findUserByUserName(String username){
+        return userRepo.findByUsername(username).orElseThrow();
+    }
+
     public void createPasswordResetTokenForUser(User user, String token) {
         PasswordResetToken myToken = new PasswordResetToken(token, user);
         passwordTokenRepository.deleteByUser(user);

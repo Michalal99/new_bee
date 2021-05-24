@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "teams",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "name")
-        })
+@Table(name="teams")
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,4 +77,5 @@ public class Team {
     public void setProject(List<Project> project) {
         this.project = project;
     }
+
 }

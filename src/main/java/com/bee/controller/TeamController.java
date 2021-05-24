@@ -1,16 +1,22 @@
 package com.bee.controller;
 
+import com.bee.models.Comment;
 import com.bee.models.Project;
 import com.bee.models.Team;
 import com.bee.models.Team_member;
+import com.bee.repository.TeamMemberRepo;
+import com.bee.security.jwt.JwtUtils;
 import com.bee.service.TeamMemberService;
 import com.bee.service.TeamService;
+import com.bee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,7 +24,14 @@ import java.util.List;
 public class TeamController {
     @Autowired
     private TeamService teamService;
+    @Autowired
     private TeamMemberService teamMemberService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TeamMemberRepo teamMemberRepo;
+    @Autowired
+    JwtUtils jwtUtils;
 
     @GetMapping("/create")
     public String createTeam(Model model) {
@@ -28,14 +41,39 @@ public class TeamController {
     }
 
     @PostMapping
-    public RedirectView storeTeam(@ModelAttribute("team") Team team, Model model) {
+    public RedirectView storeTeam(@ModelAttribute("team") Team team, Model model, HttpSession session) {
         teamService.addTeam(team);
+
+
+        var y = session.getAttribute("token");
+        var userName = jwtUtils.getUserNameFromJwtToken((String)y);
+        var user = userService.findUserByUserName(userName);
+        model.addAttribute("user", user);
+        var team_member = new Team_member();
+        team_member.setTeam(team);
+        team_member.setUser(user);
+        team_member.setEditor(true);
+        team_member.setTeamAdmin(true);
+
+        teamMemberService.addTeamMember(team_member);
+
+
         return new RedirectView("/teams");
     }
 
     @GetMapping
-    public String indexTeams(Model model) {
-        List<Team> teams = teamService.findAllTeams();
+    public String indexTeams(Model model, HttpSession session) {
+        var y = session.getAttribute("token");
+        var userName = jwtUtils.getUserNameFromJwtToken((String)y);
+        var user = userService.findUserByUserName(userName);
+        model.addAttribute("user", user);
+        var teamMembers = teamMemberRepo.findTeam_membersByUser_id(user.getId());
+        List<Team> teams = new ArrayList<>();
+
+        for(var teamMember : teamMembers){
+            teams.add(teamMember.getTeam());
+        }
+
         model.addAttribute("teams", teams);
         return "Team/index";
     }
@@ -85,7 +123,6 @@ public class TeamController {
         Team team = teamService.findTeamById(id);
         model.addAttribute("team", team);
 
-//        List<Team_member> team_members = teamMemberService.findAllTeamMembers();
         List<Team_member> team_members = teamService.findTeamById(id).getTeam_member();
         model.addAttribute("team_members", team_members);
 
@@ -94,17 +131,10 @@ public class TeamController {
 
     @GetMapping("/{id}/members/create")
     public String addMember(@PathVariable("id") Long id, Model model) {
-        Team team = teamService.findTeamById(id);
         Team_member team_member = new Team_member();
-        model.addAttribute("team", team);
+        team_member.setTeam(teamService.findTeamById(id));
         model.addAttribute("team_member", team_member);
         return "TeamMembers/create";
     }
 
-    @PostMapping("/{id}/members")
-    public RedirectView storeMember(@PathVariable("id") Long id, @ModelAttribute("team_member") Team_member team_member, Model model) {
-//        teamService.addTeam(team);
-//        teamMemberService.addTeamMember(team_member);
-        return new RedirectView("/teams");
-    }
 }
