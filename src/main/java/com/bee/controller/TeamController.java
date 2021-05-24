@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/teams")
@@ -85,14 +86,14 @@ public class TeamController {
         return "Team/show";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/{id}/delete")
     public RedirectView deleteTeam(@PathVariable("id") Long id) {
         Team oldTeam = teamService.findTeamById(id);
         teamService.deleteTeam(oldTeam);
         return new RedirectView("/teams");
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String editTeam(@PathVariable("id") Long id, Model model) {
         Team team = teamService.findTeamById(id);
         model.addAttribute("team", team);
@@ -100,17 +101,18 @@ public class TeamController {
     }
 
     //-----------projects--------------//
-
-    @GetMapping("/projects/{id}")
+    @GetMapping("/{id}/projects")
     public String showTeamProjects(@PathVariable("id") Long id, Model model) {
         List<Project> project = teamService.findTeamById(id).getProject();
         model.addAttribute("projects", project);
         return "Project/index";
     }
 
-    @GetMapping("/projects/create/{id}")
-    public String createTeamProject(Model model) {
+    @GetMapping("/{id}/projects/create")
+    public String createTeamProject(@PathVariable("id") Long id, Model model) {
+        Team team = teamService.findTeamById(id);
         Project project = new Project();
+        project.setTeam(team);
         model.addAttribute("project", project);
         return "Project/create";
     }

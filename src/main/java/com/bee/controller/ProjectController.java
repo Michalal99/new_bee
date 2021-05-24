@@ -1,6 +1,7 @@
 package com.bee.controller;
 
 import com.bee.models.Comment;
+import com.bee.models.Kanban;
 import com.bee.models.Project;
 import com.bee.models.Team;
 import com.bee.service.ProjectService;
@@ -27,8 +28,10 @@ public class ProjectController {
 
     @PostMapping
     public RedirectView storeProject(@ModelAttribute("project") Project project, Model model) {
+        Long team_id = project.getTeam().getId();
+        String path = String.format("/teams/%d/projects", team_id);
         projectService.addProject(project);
-        return new RedirectView("/projects");
+        return new RedirectView(path);
     }
 
     @GetMapping
@@ -45,14 +48,14 @@ public class ProjectController {
         return "Project/show";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/{id}/delete")
     public RedirectView deleteTeam(@PathVariable("id") Long id) {
         Project oldProject = projectService.findProjectById(id);
         projectService.deleteProject(oldProject);
         return new RedirectView("/projects");
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String editTeam(@PathVariable("id") Long id, Model model) {
         Project project = projectService.findProjectById(id);
         //System.out.println("Team_id jest rowny "+project.getTeam_id());
@@ -60,17 +63,35 @@ public class ProjectController {
         return "Project/edit";
     }
 
-    @GetMapping("/comments/{id}")
+    @GetMapping("/{id}/comments")
     public String showTeamProjects(@PathVariable("id") Long id, Model model) {
         List<Comment> comment = projectService.findProjectById(id).getComment();
         model.addAttribute("comments", comment);
         return "Comment/index";
     }
 
-    @GetMapping("/comments/create/{id}")
-    public String createProjectComment(Model model) {
+    @GetMapping("/{id}/comments/create")
+    public String createProjectComment(@PathVariable("id") Long id, Model model) {
+        Project project = projectService.findProjectById(id);
         Comment comment = new Comment();
+        comment.setProject(project);
         model.addAttribute("comment", comment);
         return "Comment/create";
+    }
+
+    @GetMapping("/{id}/kanbans")
+    public String showProjectKanbans(@PathVariable("id") Long id, Model model) {
+        Kanban kanbans = projectService.findProjectById(id).getKanban();
+        model.addAttribute("kanbans", kanbans);
+        return "Kanban/index";
+    }
+
+    @GetMapping("/{id}/kanbans/create")
+    public String createProjectKanban(@PathVariable("id") Long id, Model model) {
+        Project project = projectService.findProjectById(id);
+        Kanban kanban = new Kanban();
+        kanban.setProject(project);
+        model.addAttribute("kanban", kanban);
+        return "Kanban/create";
     }
 }

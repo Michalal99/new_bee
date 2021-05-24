@@ -36,13 +36,11 @@
             </div>
 
             <form th:action="@{/projects}" method="post" th:object="${project}" >
+                <input th:value="${project.team}" type="hidden" readonly="readonly" class="form-control" id="team" th:field="*{team}">
+                <input th:value="${project.team_id}" type="hidden" readonly="readonly" class="form-control" id="team_id" th:field="*{team_id}">
                 <div class="mb-3">
                     <label for="description" class="form-label">Project description</label>
                     <input type="text" class="form-control" id="description" th:field="*{description}">
-                </div>
-                <div class="mb-3">
-                    <label for="team.id" class="form-label">Team ID</label>
-                    <input type="number" class="form-control" id="team.id" th:field="*{team.id}">
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>

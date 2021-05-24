@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Teams</title>
+    <title>Dashboard</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
@@ -37,7 +37,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
                             <span data-feather="home"></span>
-                            Teams <span class="sr-only">(current)</span>
+                            Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -76,35 +76,109 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Teams</h1>
+                <h1 class="h2">Kanbans</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary">Export</button>
                     </div>
                 </div>
             </div>
+            <div class="grid-container">
+                <div class="Center">
+                    <div class="container">
+                        <div class="row">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Details</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="kanban_todo : ${kanban_todos}">
+                                    <td th:text="${kanban_todo.id}"></td>
+                                    <td th:text="${#strings.capitalize(kanban_todo.title)}"></td>
+                                    <td th:text="${#strings.capitalize(kanban_todo.description)}"></td>
+                                    <td><a th:href="@{/kanbans/todo/{kanbanId}(kanbanId = ${kanban.id})}" class="btn btn-info">Details</a></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
 
-            <div class="card text-center">
-                <div class="card-header">
-                    Team
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${#strings.capitalize(team.name)}"></h5>
-                    <p class="card-text" th:text="${#strings.capitalize(team.description)}"></p>
-                    <a th:href="@{/teams/{teamId}/members(teamId = ${team.id})}" class="btn btn-info">View members</a>
-                    <a th:href="@{/teams/{teamId}/projects(teamId = ${team.id})}" class="btn btn-info">View projects</a>
-                    <a th:href="@{/teams/{teamId}/members/create(teamId = ${team.id})}" class="btn btn-success">Add member</a>
-                    <a th:href="@{/teams/{teamId}/projects/create(teamId = ${team.id})}" class="btn btn-success">Add project</a>
-                    <a th:href="@{/teams/edit/{teamId}(teamId = ${team.id})}" class="btn btn-warning">Edit</a>
-                    <a th:href="@{/teams/delete/{teamId}(teamId = ${team.id})}" class="btn btn-danger">Delete</a>
-                </div>
-                <div class="card-footer text-muted">
-                    TEAM ACTIONS
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </main>
     </div>
 </div>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Bee</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="grid-container">
+    <div class="Center">
+        <div class="container">
+            <div class="row">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Comment title</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="comment : ${comments}">
+                        <td th:text="${comment.id}"></td>
+                        <td th:text="${#strings.capitalize(comment.title)}"></td>
+                        <td th:text="${#strings.capitalize(comment.description)}"></td>
+                        <td><a th:href="@{/comments/{commentId}(commentId = ${comment.id})}" class="btn btn-info">Details</a></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><a th:href="@{/comments/create}" class="btn btn-success">Create</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+</body>
+</html>
+

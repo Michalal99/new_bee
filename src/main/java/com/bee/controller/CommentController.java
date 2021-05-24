@@ -25,8 +25,10 @@ public class CommentController {
 
     @PostMapping
     public RedirectView storeComment(@ModelAttribute("comment") Comment comment, Model model) {
+        Long project_id = comment.getProject().getId();
+        String path = String.format("/projects/%d/comments", project_id);
         commentService.addComment(comment);
-        return new RedirectView("/comments");
+        return new RedirectView(path);
     }
 
     @GetMapping
@@ -43,14 +45,14 @@ public class CommentController {
         return "Comment/show";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/{id}/delete")
     public RedirectView deleteComment(@PathVariable("id") Long id) {
         Comment oldComment = commentService.findCommentById(id);
         commentService.deleteComment(oldComment);
         return new RedirectView("/comments");
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String editComment(@PathVariable("id") Long id, Model model) {
         Comment comment = commentService.findCommentById(id);
         model.addAttribute("comment", comment);
