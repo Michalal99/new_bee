@@ -93,6 +93,8 @@ To see a working application, start the browser and search for the address:
 
 The page looks like in [Screenshots](#screenshots)
 
+All steps are covered in detail in this [video](./img/was.mp4)
+
 
 ## Usage
 To log in click Login in the top right corner on start page. To create new account click Create an account.
