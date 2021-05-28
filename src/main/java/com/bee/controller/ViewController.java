@@ -40,7 +40,7 @@ PasswordTokenSecurity passwordTokenSecurity;
 
 
     @GetMapping("/login")
-    public ModelAndView getWelcomePageAsModel(Model model) {
+    public ModelAndView getLoginView(Model model) {
         model.addAttribute("loginRequest", new LoginRequest());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("Login&Register/login");

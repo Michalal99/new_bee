@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -47,8 +48,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
     {
+
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
        // authenticationManagerBuilder.jdbcAuthentication().dataSource(dataSource).
+    }
+    @Override
+    public void configure(WebSecurity web) throws Exception
+    {
+
+       web.ignoring()
+               .antMatchers("/","/api/auth/**","/css/**");
     }
 
     @Bean
@@ -64,21 +73,55 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
+
+//        http.cors().and().csrf().disable()
+//                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).and()
+//
+//                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+//              //  .authorizeRequests().antMatchers("/teams").authenticated()
+//               // 	.authorizeRequests().antMatchers("/**").permitAll()
+//               // .antMatchers("/**").permitAll()
+//                .antMatchers("/css/**").permitAll();
+//               // .anyRequest().authenticated();
+//
+//        http.antMatcher("/todo/**").authorizeRequests() //
+//                .anyRequest().authenticated() //
+//                .and()
+//                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        // http.addFilterBefore(new CustomAuthenticationFilter(), ConcurrentSessionFilter.class);
+        // http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        //	http.addFilterAfter(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+//
+
+                http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS).and()
 
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-              //  .authorizeRequests().antMatchers("/teams").authenticated()
-               // 	.authorizeRequests().antMatchers("/**").permitAll()
-               // .antMatchers("/**").permitAll()
-                .antMatchers("/css/**").permitAll();
-               // .anyRequest().authenticated();
 
-        http.antMatcher("/todo/**").authorizeRequests() //
-                .anyRequest().authenticated() //
-                .and()
-                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+                        .authorizeRequests()
+                    //        .antMatchers("/api/auth/**","/css/**","/").permitAll()
+                            .antMatchers("/projects/**","/teams/**","/comments/**").hasAnyRole("ADMIN","MODERATOR","USER")
+                            .antMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                          .and()
+//                        .authorizeRequests().antMatchers("/projects/**","/teams/**","/comments/**")
+//                        .hasAnyRole("ADMIN","MODERATOR","USER")
+//                        .and()
+//                        .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+//                        .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
+//                        .anyRequest().authenticated()
+//                        .and()
+                       .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+
+//        http.antMatcher("/todo/**").authorizeRequests() //
+//                .anyRequest().authenticated() //
+//                .and()
+//                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // http.addFilterBefore(new CustomAuthenticationFilter(), ConcurrentSessionFilter.class);
         // http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
