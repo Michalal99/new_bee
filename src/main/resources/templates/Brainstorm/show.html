@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Dashboard</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+</head>
+
+<body>
+<div th:insert="Components/Navbar.html :: navbar" ></div>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div th:insert="Components/Menu.html :: menu" ></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2" th:text="${#strings.capitalize(brainstorm.title)}"></h1>
+
+            </div>
+            <div class="grid-container">
+                <div class="Center">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            Brainstorm
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${#strings.capitalize(brainstorm.title)}"></h5>
+                            <p class="card-text" th:text="${#strings.capitalize(brainstorm.description)}"></p>
+                            <a th:href="@{/comments/{commentId}/edit(commentId = ${brainstorm.id})}" class="btn btn-warning">Edit</a>
+                            <a th:href="@{/comments/{commentId}/delete(commentId = ${brainstorm.id})}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

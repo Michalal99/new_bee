@@ -21,7 +21,7 @@ public class BrainstormController {
     ProjectService projectService;
 
     @GetMapping("create")
-    public String createProjectComment(@PathVariable("id") Long id, Model model) {
+    public String createBrainstorm(@PathVariable("id") Long id, Model model) {
         Project project = projectService.findProjectById(id);
         var brainstorm = new Brainstorm();
         brainstorm.setProject(project);
@@ -31,11 +31,18 @@ public class BrainstormController {
     }
 
     @PostMapping
-    public RedirectView storeComment(@ModelAttribute("brainstorm") Brainstorm brainstorm, Model model) {
+    public RedirectView storeBrainstorm(@ModelAttribute("brainstorm") Brainstorm brainstorm, Model model) {
         Long project_id = brainstorm.getProject().getId();
         String path = String.format("/projects/%d", project_id);
 //        commentService.addComment(comment);
         brainstormService.addBrainstorm(brainstorm);
         return new RedirectView(path);
+    }
+
+    @GetMapping("/{id2}")
+    public String showBrainstorm(@PathVariable("id2") Long id, Model model) {
+        Brainstorm brainstorm = brainstormService.findBrainstormById(id);
+        model.addAttribute("brainstorm", brainstorm);
+        return "Brainstorm/show";
     }
 }

@@ -78,7 +78,7 @@
                                 <td th:text="${brainstorm.id}"></td>
                                 <td th:text="${#strings.capitalize(brainstorm.title)}"></td>
                                 <td th:text="${#strings.capitalize(brainstorm.description)}"></td>
-                                <td><a href="#" class="btn btn-info">Details</a></td>
+                                <td><a th:href="@{/projects/{id}/brainstorms/{id2}(id = ${project.id}, id2 = ${brainstorm.id})}" class="btn btn-info">Details</a></td>
                             </tr>
                             <tr>
                                 <td></td>
