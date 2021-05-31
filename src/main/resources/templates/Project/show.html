@@ -19,16 +19,16 @@
 </head>
 
 <body>
-<div th:insert="Components/Navbar.html :: navbar" ></div>
+<div th:insert="Components/Navbar.html :: navbar"></div>
 
 <div class="container-fluid">
     <div class="row">
-        <div th:insert="Components/Menu.html :: menu" ></div>
-        <div th:insert="Components/Menu.html :: menu" ></div>
+        <div th:insert="Components/Menu.html :: menu"></div>
+        <div th:insert="Components/Menu.html :: menu"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Projects</h1>
+                <h1 class="h2" th:text="${#strings.capitalize(project.description)}"></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button class="btn btn-sm btn-outline-secondary">Export</button>
@@ -38,59 +38,94 @@
 
             <div class="card text-center">
                 <div class="card-header">
-                    Project
+                    <h5>Project</h5>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${#strings.capitalize(project.description)}"></h5>
                     <a href="#" class="btn btn-info">View brainstorms</a>
-                    <a th:href="@{/projects/{projectId}/kanbans(projectId = ${project.id})}" class="btn btn-info"}>View kanbans</a>
+                    <a th:href="@{/projects/{projectId}/kanbans(projectId = ${project.id})}" class="btn btn-info" }>View
+                        kanbans</a>
                     <a href="#" class="btn btn-info">View meetings</a>
                     <br><br>
                     <a href="#" class="btn btn-success">Add brainstorm</a>
-                    <a th:href="@{/projects/{projectId}/kanbans/create(projectId = ${project.id})}" class="btn btn-success">Add kanban</a>
+                    <a th:href="@{/projects/{projectId}/kanbans/create(projectId = ${project.id})}"
+                       class="btn btn-success">Add kanban</a>
                     <a href="#" class="btn btn-success">Add meeting</a>
                     <br><br>
-                    <a th:href="@{/projects/{projectId}/edit(projectId = ${project.id})}" class="btn btn-warning">Edit</a>
+                    <a th:href="@{/projects/{projectId}/edit(projectId = ${project.id})}"
+                       class="btn btn-warning">Edit</a>
                     <a th:href="@{/projects/{projectId}/delete(projectId = ${project.id})}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
             <br><br>
             <div class="card text-center">
                 <div class="card-header">
-                    Comments
+                    <h5>Brainstorms</h5>
                 </div>
                 <div class="card-body">
-                    <div class="grid-container">
-                        <div class="Center">
-                            <div class="container">
-                                <div class="row">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Comment title</th>
-                                            <th scope="col">Content</th>
-                                            <th scope="col">Details</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="comment : ${comments}">
-                                            <td th:text="${comment.id}"></td>
-                                            <td th:text="${#strings.capitalize(comment.title)}"></td>
-                                            <td th:text="${#strings.capitalize(comment.description)}"></td>
-                                            <td><a th:href="@{/comments/{commentId}(commentId = ${comment.id})}" class="btn btn-info">Details</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><a th:href="@{/projects/{id}/comments/create(id = ${project.id})}" class="btn btn-success">Create</a></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Brainstorm title</th>
+                                <th scope="col">Brainstorm content</th>
+                                <th scope="col">Details</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="brainstorm : ${brainstorms}">
+                                <td th:text="${brainstorm.id}"></td>
+                                <td th:text="${#strings.capitalize(brainstorm.title)}"></td>
+                                <td th:text="${#strings.capitalize(brainstorm.description)}"></td>
+                                <td><a href="#" class="btn btn-info">Details</a></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a th:href="@{/projects/{id}/brainstorms/create(id = ${project.id})}"
+                                       class="btn btn-success">Create</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <br><br>
+            <div class="card text-center">
+                <div class="card-header">
+                    <h5>Discussion</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Comment title</th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Details</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="comment : ${comments}">
+                                <td th:text="${comment.id}"></td>
+                                <td th:text="${#strings.capitalize(comment.title)}"></td>
+                                <td th:text="${#strings.capitalize(comment.description)}"></td>
+                                <td><a th:href="@{/comments/{commentId}(commentId = ${comment.id})}"
+                                       class="btn btn-info">Details</a></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a th:href="@{/projects/{id}/comments/create(id = ${project.id})}"
+                                       class="btn btn-success">Create</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
