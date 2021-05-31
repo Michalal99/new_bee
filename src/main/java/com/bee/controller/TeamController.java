@@ -6,6 +6,7 @@ import com.bee.models.Team;
 import com.bee.models.Team_member;
 import com.bee.repository.TeamMemberRepo;
 import com.bee.security.jwt.JwtUtils;
+import com.bee.service.ProjectService;
 import com.bee.service.TeamMemberService;
 import com.bee.service.TeamService;
 import com.bee.service.UserService;
@@ -25,6 +26,8 @@ import java.util.Set;
 public class TeamController {
     @Autowired
     private TeamService teamService;
+    @Autowired
+    private ProjectService projectService;
     @Autowired
     private TeamMemberService teamMemberService;
     @Autowired
@@ -76,6 +79,10 @@ public class TeamController {
         }
 
         model.addAttribute("teams", teams);
+
+        List<Project> projects = projectService.findAllProjects();
+        model.addAttribute("projects", projects);
+
         return "Team/index";
     }
 
