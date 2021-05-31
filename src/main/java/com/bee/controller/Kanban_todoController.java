@@ -34,7 +34,7 @@ public class Kanban_todoController {
     @GetMapping
     public String indexKanbans(Model model) {
         List<Kanban_todo> kanbans_todos = kanban_todoService.findAllKanbans_todo();
-        model.addAttribute("kanbans_todos", kanbans_todos);
+        model.addAttribute("kanbans_subs", kanbans_todos);
         return "Kanban/index_sub";
     }
 
