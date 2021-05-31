@@ -20,12 +20,16 @@ public class Kanban_done {
     @NotBlank
     private String description;
 
+    @Column(name="kanban_id", insertable = false, updatable = false)
+    private Long kanban_id;
     @ManyToOne
-    @JoinColumn(name="kanban_id")
+    @JoinColumn(name="kanban_id", nullable = false)
     private Kanban kanban;
 
+    @Column(name="user_id", insertable = false, updatable = false)
+    private Long user_id;
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id", nullable = false)
     private User user;
 
     public Kanban_done() {
@@ -75,5 +79,21 @@ public class Kanban_done {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getKanban_id() {
+        return kanban_id;
+    }
+
+    public void setKanban_id(Long kanban_id) {
+        this.kanban_id = kanban_id;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 }

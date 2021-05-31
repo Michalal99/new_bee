@@ -1,6 +1,6 @@
 package com.bee.controller;
 
-import com.bee.models.Kanban;
+import com.bee.models.*;
 import com.bee.service.KanbanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,5 +48,53 @@ public class KanbanController {
         Kanban oldKanban = kanbanService.findKanbanById(id);
         kanbanService.deleteKanban(oldKanban);
         return new RedirectView("/kanbans");
+    }
+
+    @GetMapping("/{id}/todo")
+    public String showKanbanToDos(@PathVariable("id") Long id, Model model) {
+        List<Kanban_todo> kanban_todos = kanbanService.findKanbanById(id).getKanban_todo();
+        model.addAttribute("kanbans", kanban_todos);
+        return "Kanban/index_sub";
+    }
+
+    @GetMapping("/{id}/todo/create")
+    public String createKanbanToDo(@PathVariable("id") Long id, Model model) {
+        Kanban kanban = kanbanService.findKanbanById(id);
+        Kanban_todo kanban_todo = new Kanban_todo();
+        kanban_todo.setKanban(kanban);
+        model.addAttribute("kanban_sub", kanban_todo);
+        return "Kanban/create_sub";
+    }
+
+    @GetMapping("/{id}/done")
+    public String showKanbanDones(@PathVariable("id") Long id, Model model) {
+        List<Kanban_done> kanban_dones = kanbanService.findKanbanById(id).getKanban_done();
+        model.addAttribute("kanbans", kanban_dones);
+        return "Kanban/index_sub";
+    }
+
+    @GetMapping("/{id}/done/create")
+    public String createKanbanDone(@PathVariable("id") Long id, Model model) {
+        Kanban kanban = kanbanService.findKanbanById(id);
+        Kanban_done kanban_done = new Kanban_done();
+        kanban_done.setKanban(kanban);
+        model.addAttribute("kanban_sub", kanban_done);
+        return "Kanban/create_sub";
+    }
+
+    @GetMapping("/{id}/inprogress")
+    public String showKanbanInProgresses(@PathVariable("id") Long id, Model model) {
+        List<Kanban_inprogress> kanban_inprogresses = kanbanService.findKanbanById(id).getKanban_inprogress();
+        model.addAttribute("kanbans", kanban_inprogresses);
+        return "Kanban/index_sub";
+    }
+
+    @GetMapping("/{id}/inprogress/create")
+    public String createKanbanInProgress(@PathVariable("id") Long id, Model model) {
+        Kanban kanban = kanbanService.findKanbanById(id);
+        Kanban_inprogress kanban_inprogress = new Kanban_inprogress();
+        kanban_inprogress.setKanban(kanban);
+        model.addAttribute("kanban_sub", kanban_inprogress);
+        return "Kanban/create_sub";
     }
 }
