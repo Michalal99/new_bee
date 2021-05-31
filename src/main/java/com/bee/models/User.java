@@ -28,7 +28,7 @@ public class User {
     @NotBlank
     private String password;
 
-    @NotBlank
+   // @NotBlank
     private String avatar_path;
 
 
@@ -36,7 +36,7 @@ public class User {
    // private String token;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

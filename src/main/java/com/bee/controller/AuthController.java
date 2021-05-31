@@ -129,7 +129,7 @@ public class AuthController {
         return "redirect:/api/auth/login";
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public String authenticateUser(@ModelAttribute("loginRequest")  LoginRequest loginRequest, RedirectAttributes redirectAttributes,HttpSession session )
     {
 
