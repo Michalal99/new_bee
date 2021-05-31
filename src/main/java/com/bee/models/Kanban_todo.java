@@ -26,9 +26,8 @@ public class Kanban_todo {
     @JoinColumn(name="kanban_id", nullable = false)
     private Kanban kanban;
 
-    //@NotBlank
-    //@Size(max=50)
-    //private String users_id;
+    @Column(name="user_id", insertable = false, updatable = false)
+    private Long user_id;
     @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
     private User user;
@@ -88,5 +87,13 @@ public class Kanban_todo {
 
     public void setKanban_id(Long kanban_id) {
         this.kanban_id = kanban_id;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 }

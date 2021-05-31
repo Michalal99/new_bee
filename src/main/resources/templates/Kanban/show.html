@@ -89,12 +89,12 @@
                     Kanban
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-info">View to-dos</a>
-                    <a href="#" class="btn btn-info">View inprogresses</a>
-                    <a href="#" class="btn btn-info">View dones</a>
-                    <a th:href="@{/kanbans/todo/create}" class="btn btn-success">Add to-do</a>
-                    <a href="#" class="btn btn-success">Add inprogress</a>
-                    <a href="#" class="btn btn-success">Add done</a>
+                    <a th:href="@{/kanbans/{kanbanId}/todo(kanbanId = ${kanban.id})}"class="btn btn-info">View to-dos</a>
+                    <a th:href="@{/kanbans/{kanbanId}/inprogress(kanbanId = ${kanban.id})}" class="btn btn-info">View inprogresses</a>
+                    <a th:href="@{/kanbans/{kanbanId}/done(kanbanId = ${kanban.id})}" class="btn btn-info">View dones</a>
+                    <a th:href="@{/kanbans/{kanbanId}/todo/create(kanbanId = ${kanban.id})}" class="btn btn-success">Add to-do</a>
+                    <a href="@{/kanbans/{kanbanId}/inprogress/create(kanbanId = ${kanban.id})}" class="btn btn-success">Add inprogress</a>
+                    <a href="@{/kanbans/{kanbanId}/done/create(kanbanId = ${kanban.id})}" class="btn btn-success">Add done</a>
                 </div>
                 <div class="card-footer text-muted">
                     PROJECT ACTIONS

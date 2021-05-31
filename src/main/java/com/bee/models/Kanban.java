@@ -2,6 +2,7 @@ package com.bee.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,13 +15,13 @@ public class Kanban {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="kanban", orphanRemoval = true)
-    private Set<Kanban_done> kanban_done;
+    private List<Kanban_done> kanban_done;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="kanban", orphanRemoval = true)
-    private Set<Kanban_inprogress> kanban_inprogress;
+    private List<Kanban_inprogress> kanban_inprogress;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="kanban", orphanRemoval = true)
-    private Set<Kanban_todo> kanban_todo;
+    private List<Kanban_todo> kanban_todo;
 
     @Column(name="project_id", insertable = false, updatable = false)
     private Long project_id;
@@ -43,27 +44,27 @@ public class Kanban {
         this.id = id;
     }
 
-    public Set<Kanban_done> getKanban_done() {
+    public List<Kanban_done> getKanban_done() {
         return kanban_done;
     }
 
-    public void setKanban_done(Set<Kanban_done> kanban_done) {
+    public void setKanban_done(List<Kanban_done> kanban_done) {
         this.kanban_done = kanban_done;
     }
 
-    public Set<Kanban_inprogress> getKanban_inprogress() {
+    public List<Kanban_inprogress> getKanban_inprogress() {
         return kanban_inprogress;
     }
 
-    public void setKanban_inprogress(Set<Kanban_inprogress> kanban_inprogress) {
+    public void setKanban_inprogress(List<Kanban_inprogress> kanban_inprogress) {
         this.kanban_inprogress = kanban_inprogress;
     }
 
-    public Set<Kanban_todo> getKanban_todo() {
+    public List<Kanban_todo> getKanban_todo() {
         return kanban_todo;
     }
 
-    public void setKanban_todo(Set<Kanban_todo> kanban_todo) {
+    public void setKanban_todo(List<Kanban_todo> kanban_todo) {
         this.kanban_todo = kanban_todo;
     }
 
