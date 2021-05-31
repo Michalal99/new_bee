@@ -89,6 +89,8 @@ public class TeamController {
     @GetMapping("/{id}")
     public String showTeam(@PathVariable("id") Long id, Model model) {
         Team newTeam = teamService.findTeamById(id);
+        List<Project> projects = projectService.findAllProjects();
+        model.addAttribute("projects", projects);
         model.addAttribute("team", newTeam);
         return "Team/show";
     }

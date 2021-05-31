@@ -29,7 +29,7 @@ public class ProjectController {
     @PostMapping
     public RedirectView storeProject(@ModelAttribute("project") Project project, Model model) {
         Long team_id = project.getTeam().getId();
-        String path = String.format("/teams/%d/projects", team_id);
+        String path = String.format("/teams/%d", team_id);
         projectService.addProject(project);
         return new RedirectView(path);
     }

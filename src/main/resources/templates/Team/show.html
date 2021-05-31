@@ -79,7 +79,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td><a th:href="@{/projects/create}" class="btn btn-success">Create</a></td>
+                                        <td><a th:href="@{/teams/{teamId}/projects/create(teamId = ${team.id})}" class="btn btn-success">Create</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
