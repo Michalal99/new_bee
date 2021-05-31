@@ -28,13 +28,6 @@ public class User {
     @NotBlank
     private String password;
 
-<<<<<<< HEAD
-=======
-   // @NotBlank
-    private String avatar_path;
-
-
->>>>>>> cfe339561e32e1374740ec1ee0e5935e91f7c609
     private boolean authorized;
    // private String token;
 
