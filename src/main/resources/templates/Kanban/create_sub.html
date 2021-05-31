@@ -81,7 +81,7 @@
       </div>
       <div class="grid-container">
         <div class="Center">
-          <form th:action="@{/kanbans}" method="post" th:object="${kanban_sub}" >
+          <form th:action="@{/kanbans_todo}" method="post" th:object="${kanban_sub}" >
             <input th:value="${kanban_sub.kanban}" type="hidden" readonly="readonly" class="form-control" id="kanban" th:field="*{kanban}">
             <input th:value="${kanban_sub.kanban_id}" type="hidden" readonly="readonly" class="form-control" id="kanban_id" th:field="*{kanban_id}">
             <div class="mb-3">
