@@ -79,7 +79,7 @@ public class KanbanController {
         Kanban_done kanban_done = new Kanban_done();
         kanban_done.setKanban(kanban);
         model.addAttribute("kanban_sub", kanban_done);
-        return "Kanban/create_sub";
+        return "Kanban/create_sub3";
     }
 
     @GetMapping("/{id}/inprogress")
@@ -95,6 +95,6 @@ public class KanbanController {
         Kanban_inprogress kanban_inprogress = new Kanban_inprogress();
         kanban_inprogress.setKanban(kanban);
         model.addAttribute("kanban_sub", kanban_inprogress);
-        return "Kanban/create_sub";
+        return "Kanban/create_sub2";
     }
 }

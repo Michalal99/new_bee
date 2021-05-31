@@ -150,21 +150,20 @@
             <th scope="col">#</th>
             <th scope="col">Comment title</th>
             <th scope="col">Content</th>
-            <th scope="col">Details</th>
+            <!--th scope="col">Details</th-->
           </tr>
           </thead>
           <tbody>
-          <tr th:each="comment : ${comments}">
-            <td th:text="${comment.id}"></td>
-            <td th:text="${#strings.capitalize(comment.title)}"></td>
-            <td th:text="${#strings.capitalize(comment.description)}"></td>
-            <td><a th:href="@{/comments/{commentId}(commentId = ${comment.id})}" class="btn btn-info">Details</a></td>
+          <tr th:each="kanban_sub : ${kanban_subs}">
+            <td th:text="${kanban_sub.id}"></td>
+            <td th:text="${#strings.capitalize(kanban_sub.title)}"></td>
+            <td th:text="${#strings.capitalize(kanban_sub.description)}"></td>
+            <!--td><a th:href="@{/comments/{commentId}(commentId = ${comment.id})}" class="btn btn-info">Details</a></td-->
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td></td>
-            <td><a th:href="@{/comments/create}" class="btn btn-success">Create</a></td>
           </tr>
           </tbody>
         </table>
