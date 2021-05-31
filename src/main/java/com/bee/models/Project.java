@@ -26,8 +26,11 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="project", orphanRemoval = true)
     private Set<Meeting> meeting = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="project", orphanRemoval = true)
-    private final Set<Brainstorm> brainstorm = new HashSet<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy="project", orphanRemoval = true)
+//    private final Set<Brainstorm> brainstorm = new HashSet<>();
+
+    @OneToMany(mappedBy="project")
+    private List<Brainstorm> brainstorm;
 
     @OneToMany(mappedBy="project")
     private List<Comment> comment;
@@ -91,7 +94,7 @@ public class Project {
         this.meeting.addAll(meeting);
     }
 
-    public Set<Brainstorm> getBrainstorm() {
+    public List<Brainstorm> getBrainstorm() {
         return brainstorm;
     }
 
