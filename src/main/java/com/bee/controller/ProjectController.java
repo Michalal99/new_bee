@@ -4,6 +4,7 @@ import com.bee.models.Comment;
 import com.bee.models.Kanban;
 import com.bee.models.Project;
 import com.bee.models.Team;
+import com.bee.service.CommentService;
 import com.bee.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import java.util.List;
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/create")
     public String createProject(Model model) {
@@ -45,6 +48,8 @@ public class ProjectController {
     public String showTeam(@PathVariable("id") Long id, Model model) {
         Project newProject = projectService.findProjectById(id);
         model.addAttribute("project", newProject);
+        List<Comment> comments = commentService.findAllComments();
+        model.addAttribute("comments", comments);
         return "Project/show";
     }
 
