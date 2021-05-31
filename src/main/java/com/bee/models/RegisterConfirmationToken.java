@@ -49,6 +49,8 @@ private static final int EXPIRATION = 60 * 24;
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
+
+
   private String token;
 
   public RegisterConfirmationToken(String token, User user) {
@@ -72,5 +74,8 @@ private static final int EXPIRATION = 60 * 24;
 
   public User getUser() {
     return user;
+  }
+  public String getToken() {
+    return token;
   }
 }
