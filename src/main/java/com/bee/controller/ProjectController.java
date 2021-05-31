@@ -1,9 +1,8 @@
 package com.bee.controller;
 
-import com.bee.models.Comment;
-import com.bee.models.Kanban;
-import com.bee.models.Project;
-import com.bee.models.Team;
+import com.bee.models.*;
+import com.bee.service.BrainstormService;
+import com.bee.service.CommentService;
 import com.bee.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +17,11 @@ import java.util.List;
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private BrainstormService brainstormService;
+
 
     @GetMapping("/create")
     public String createProject(Model model) {
@@ -29,7 +33,7 @@ public class ProjectController {
     @PostMapping
     public RedirectView storeProject(@ModelAttribute("project") Project project, Model model) {
         Long team_id = project.getTeam().getId();
-        String path = String.format("/teams/%d/projects", team_id);
+        String path = String.format("/teams/%d", team_id);
         projectService.addProject(project);
         return new RedirectView(path);
     }
@@ -45,6 +49,13 @@ public class ProjectController {
     public String showTeam(@PathVariable("id") Long id, Model model) {
         Project newProject = projectService.findProjectById(id);
         model.addAttribute("project", newProject);
+
+        List<Comment> comments = commentService.findAllComments();
+        model.addAttribute("comments", comments);
+
+        List<Brainstorm> brainstorms = brainstormService.findAllBrainstorms();
+        model.addAttribute("brainstorms", brainstorms);
+
         return "Project/show";
     }
 
@@ -67,6 +78,7 @@ public class ProjectController {
     public String showTeamProjects(@PathVariable("id") Long id, Model model) {
         List<Comment> comment = projectService.findProjectById(id).getComment();
         model.addAttribute("comments", comment);
+
         return "Comment/index";
     }
 
