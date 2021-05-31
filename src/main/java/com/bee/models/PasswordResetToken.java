@@ -36,6 +36,11 @@ public class PasswordResetToken {
 
     private String token;
 
+    @Override
+    public String toString() {
+        return token;
+    }
+
     public PasswordResetToken(String token, User user) {
         this.token = token;
         this.user = user;
