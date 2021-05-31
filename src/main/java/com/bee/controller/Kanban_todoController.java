@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/kanbans/todo")
+@RequestMapping("/kanbans_todo")
 public class Kanban_todoController {
     @Autowired
     private Kanban_todoService kanban_todoService;
@@ -22,20 +22,20 @@ public class Kanban_todoController {
     public String createKanban_todo(Model model) {
         Kanban_todo kanban_todo = new Kanban_todo();
         model.addAttribute("kanban_todo", kanban_todo);
-        return "Kanban_todo/create";
+        return "Kanban/create_sub";
     }
 
     @PostMapping
     public RedirectView storeKanban_todo(@ModelAttribute("kanban_todo") Kanban_todo kanban_todo, Model model) {
         kanban_todoService.addKanban_todo(kanban_todo);
-        return new RedirectView("/kanbans/todo");
+        return new RedirectView("/kanbans");
     }
 
     @GetMapping
     public String indexKanbans(Model model) {
         List<Kanban_todo> kanbans_todos = kanban_todoService.findAllKanbans_todo();
         model.addAttribute("kanbans_todos", kanbans_todos);
-        return "Kanban_todo/index";
+        return "Kanban/index_sub";
     }
 
     @GetMapping("/{id}")
@@ -49,6 +49,6 @@ public class Kanban_todoController {
     public RedirectView deleteKanban_todo(@PathVariable("id") Long id) {
         Kanban_todo oldKanban_todo = kanban_todoService.findKanban_todoById(id);
         kanban_todoService.deleteKanban_todo(oldKanban_todo);
-        return new RedirectView("/kanbans/todo");
+        return new RedirectView("/kanbans_todo");
     }
 }
