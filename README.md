@@ -107,6 +107,13 @@ To log in click Login in the top right corner on start page. To create new accou
   - at least one special character
   - no whitespaces
 - if you are the first user you will get administrator rights
+
+Note:
+If you are logging in for the first time go to bee/src/main/java/com.bee/StartUpApplication and uncomment lines 24 to 46
+
+![Uncomment](./img/startapp.jpg)
+
+Now start the application and add a user via the 'Create an account' tab. When the first user is stored in the database, comment out lines 24-46 in StartUpApplication.
 <!--How does one go about using it?--!>
 <!--Provide various use cases and code examples here.-->
 
