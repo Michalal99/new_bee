@@ -50,10 +50,12 @@ public class ProjectController {
         Project newProject = projectService.findProjectById(id);
         model.addAttribute("project", newProject);
 
-        List<Comment> comments = commentService.findAllComments();
+//        List<Comment> comments = commentService.findAllComments();
+        List<Comment> comments = newProject.getComment();
         model.addAttribute("comments", comments);
 
-        List<Brainstorm> brainstorms = brainstormService.findAllBrainstorms();
+//        List<Brainstorm> brainstorms = brainstormService.findAllBrainstorms();
+        List<Brainstorm> brainstorms = newProject.getBrainstorm();
         model.addAttribute("brainstorms", brainstorms);
 
         return "Project/show";
